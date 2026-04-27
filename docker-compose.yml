@@ -1,0 +1,16 @@
+services:
+  app:
+    image: linkedinsney-web:latest
+    container_name: linkedinsney-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID: ${NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}
+    ports:
+      - "4005:3000"
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      API_URL: ${API_URL}
+      NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID: ${NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}
+    restart: unless-stopped
