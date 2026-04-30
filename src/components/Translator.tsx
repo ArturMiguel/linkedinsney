@@ -64,6 +64,7 @@ export const Translator = ({ onTranslated }: { onTranslated?: () => void }) => {
             </label>
             <Textarea
               {...register("text", { required: true, maxLength: MAX })}
+              maxLength={MAX}
               placeholder="Ex: meu chefe é incompetente e o projeto foi um desastre..."
               className="min-h-[220px] resize-none rounded-xl border-border bg-background text-base focus-visible:ring-primary"
             />

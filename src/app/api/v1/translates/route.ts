@@ -15,7 +15,9 @@ const SYSTEM_PROMPT = `
   - Não use formatações como negrito, itálico, sublinhado ou qualquer símbolo markdown, incluindo **, __, ##
   - Use \n para quebras de linha entre parágrafos
   - Ao final do texto, quebre linha com \n e adicione exatamente 3 hashtags relevantes ao contexto da mensagem, no formato #PalavraChave
-  - Responda APENAS com o texto traduzido, sem explicações ou comentários adicionais`;
+  - Responda APENAS com o texto traduzido, sem explicações ou comentários adicionais
+  - O texto deve conter até 3 parágrafos, sendo o primeiro focado na transformação do problema, o segundo detalhando o aprendizado ou oportunidade e o terceiro convidando à reflexão ou engajamento, seguido das hashtags
+`;
 
 export async function POST(req: NextRequest) {
   const { text } = await req.json();
@@ -28,10 +30,10 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  const apiUrl = process.env.API_URL;
+  const apiUrl = process.env.OLLAMA_API_URL;
   if (!apiUrl) {
     return NextResponse.json({
-      error: "API_URL not configured"
+      error: "OLLAMA_API_URL not configured"
     }, {
       status: 500
     });
@@ -51,6 +53,12 @@ export async function POST(req: NextRequest) {
         content: text
       }
     ]
+  }, {
+    headers: {
+      Authorization: `Bearer ${process.env.OLLAMA_API_TOKEN}`
+    }
+  }).catch((error) => {
+    throw new Error("Failed to call API");
   });
 
   const content: string = data?.message?.content ?? "";

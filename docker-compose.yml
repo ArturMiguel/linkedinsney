@@ -11,6 +11,7 @@ services:
       - "4005:3000"
     environment:
       NODE_ENV: ${NODE_ENV}
-      API_URL: ${API_URL}
+      OLLAMA_API_URL: ${OLLAMA_API_URL}
+      OLLAMA_API_TOKEN: ${OLLAMA_API_TOKEN}
       NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID: ${NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}
     restart: unless-stopped
