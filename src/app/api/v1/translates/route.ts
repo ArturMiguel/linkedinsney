@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
 
   if (!text || typeof text !== "string" || !text.trim()) {
     return NextResponse.json({
-      error: "text is required"
+      error: "Informe o texto a ser traduzido"
     }, {
       status: 400
     });
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
   const apiUrl = process.env.OLLAMA_API_URL;
   if (!apiUrl) {
     return NextResponse.json({
-      error: "OLLAMA_API_URL not configured"
+      error: "API de tradução não está configurada"
     }, {
       status: 500
     });
@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
       Authorization: `Bearer ${process.env.OLLAMA_API_TOKEN}`
     }
   }).catch((error) => {
-    throw new Error("Failed to call API");
+    throw new Error(`Erro ao se comunicar com a API de tradução: ${error.message}`);
   });
 
   const content: string = data?.message?.content ?? "";

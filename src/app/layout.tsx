@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { AuthProvider } from "@/providers/AuthProvider";
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
@@ -72,7 +73,9 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={cn("h-full", "antialiased", geistSans.variable, jetbrainsMono.variable)}>
       <body className="min-h-full" suppressHydrationWarning>
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
