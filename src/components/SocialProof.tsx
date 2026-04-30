@@ -2,6 +2,7 @@
 
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
+import { Container } from "@/components/ui/container";
 
 const examples = [
   {
@@ -39,7 +40,7 @@ export const SocialProof = () => {
   const count = useCountUp(28473);
   return (
     <section className="bg-background py-16">
-      <div>
+      <Container>
         <div className="mx-auto max-w-2xl rounded-2xl border border-border bg-gradient-hero p-6 text-center shadow-soft">
           <div className="text-4xl font-extrabold text-primary tabular-nums sm:text-5xl">
             {count.toLocaleString("pt-BR")}
@@ -64,7 +65,7 @@ export const SocialProof = () => {
             </article>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

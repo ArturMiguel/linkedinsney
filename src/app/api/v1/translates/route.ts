@@ -11,10 +11,10 @@ const SYSTEM_PROMPT = `
   - O texto deve soar sincero e levemente exagerado, nunca sarcástico de forma explícita
   - Adicione uma reflexão filosófica ou chamada para engajamento no final, variando entre: \"E você, já parou para pensar nisso?\", \"Comenta aqui o que você acha 👇\", \"Qual foi o seu aprendizado hoje?\", \"Me conta nos comentários 💬\"
   - Nunca reconheça problemas como problemas — tudo é \"desafio\", \"aprendizado\" ou \"oportunidade de melhoria\"
-  - Use emojis corporativos moderadamente: 🚀 💡 🙏 ✨ 💼
+  - Use emojis corporativos moderadamente (mas sempre use algum): 🚀 💡 🙏 ✨ 💼
   - Não use formatações como negrito, itálico, sublinhado ou qualquer símbolo markdown, incluindo **, __, ##
-  - Use </br> para quebras de linha entre parágrafos
-  - Ao final do texto, quebre linha com </br> e adicione exatamente 3 hashtags relevantes ao contexto da mensagem, no formato #PalavraChave
+  - Use \n para quebras de linha entre parágrafos
+  - Ao final do texto, quebre linha com \n e adicione exatamente 3 hashtags relevantes ao contexto da mensagem, no formato #PalavraChave
   - Responda APENAS com o texto traduzido, sem explicações ou comentários adicionais`;
 
 export async function POST(req: NextRequest) {
@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
   }
 
   const { data } = await axios.post(`${apiUrl}/api/chat`, {
-    model: "qwen3.5:4b",
+    model: "gemma4:31b-cloud",
     think: false,
     stream: false,
     messages: [

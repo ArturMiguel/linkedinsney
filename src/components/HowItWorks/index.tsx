@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { LinkedinLogoIcon, MagicWandIcon } from "@phosphor-icons/react";
 import { CopyIcon } from "@phosphor-icons/react/dist/ssr";
+import { Container } from "@/components/ui/container";
 
 const steps = [
   { icon: CopyIcon, title: "Cole seu texto", desc: "Aquela verdade nua e crua." },
@@ -13,7 +14,7 @@ const steps = [
 export const HowItWorks = () => {
   return (
     <section className="bg-surface-soft py-16">
-      <div>
+      <Container>
         <h2 className="text-center text-2xl font-bold text-foreground sm:text-3xl">
           Como funciona
         </h2>
@@ -49,7 +50,7 @@ export const HowItWorks = () => {
           </Link>
           .
         </p>
-      </div>
+      </Container>
     </section>
   );
 };
