@@ -207,6 +207,41 @@ export default function PrivacyPolicy() {
           </Link>.
         </p>
 
+        <h4 className="my-3">Dados acessados via Google</h4>
+
+        <p className="my-3">
+          Ao optar por autenticar-se com sua conta Google, acessamos exclusivamente os seguintes dados:
+        </p>
+        <ul className="list-disc list-inside">
+          <li>Nome completo</li>
+          <li>Endereço de e-mail</li>
+          <li>Foto de perfil pública</li>
+        </ul>
+
+        <p className="my-3">
+          <b>Finalidade do uso:</b> Esses dados são utilizados exclusivamente para criar e autenticar sua conta no Linkedinsney.
+          Não utilizamos dados da sua conta Google para nenhuma outra finalidade — não analisamos, processamos
+          nem acessamos conteúdo do Gmail, Google Drive ou qualquer outro serviço Google além do perfil básico de autenticação.
+        </p>
+
+        <p className="my-3">
+          <b>Compartilhamento:</b> Não compartilhamos dados da sua conta Google com terceiros,
+          exceto prestadores de serviço essenciais à operação da plataforma (ex: infraestrutura de hospedagem),
+          que estão contratualmente proibidos de utilizá-los para outras finalidades.
+        </p>
+
+        <p className="my-3">
+          <b>Armazenamento e proteção:</b> Os dados obtidos via Google são armazenados em servidores seguros,
+          com acesso restrito e protegidos por criptografia em trânsito (TLS) e em repouso.
+          Aplicamos medidas técnicas e organizacionais adequadas para prevenir acesso não autorizado.
+        </p>
+
+        <p className="my-3">
+          <b>Retenção e exclusão:</b> Os dados da sua conta Google são mantidos enquanto sua conta no Linkedinsney estiver ativa.
+          Ao solicitar a exclusão da sua conta, removeremos todos os dados associados dos nossos sistemas ativos em até 30 dias.
+          Para solicitar a exclusão, entre em contato pelo e-mail { supportMail }.
+        </p>
+
         <h3 className="my-3">2. COMO PROCESSAMOS SUAS INFORMAÇÕES?</h3>
 
         <p className="my-3">

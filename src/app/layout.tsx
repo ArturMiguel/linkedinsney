@@ -51,9 +51,7 @@ export const metadata: Metadata = {
     description: "Seu texto honesto virou propósito. Cole qualquer mensagem e receba um post corporativo cheio de buzzwords e impacto. Powered by IA.",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        url: "/logo.png",
         alt: "Linkedisney — Tradutor de Posts para LinkedIn",
       },
     ],
@@ -62,7 +60,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Linkedisney — Tradutor de Posts para LinkedIn",
     description: "Cole seu texto honesto e receba um post corporativo digno do LinkedIn. Buzzwords, propósito e emojis inclusos.",
-    images: ["/og-image.png"],
+    images: ["/logo.png"],
   },
 };
 
@@ -72,11 +70,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="pt-BR"
-      className={cn("h-full", "antialiased", geistSans.variable, jetbrainsMono.variable)}
-    >
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>{children}</body>
+    <html lang="pt-BR" className={cn("h-full", "antialiased", geistSans.variable, jetbrainsMono.variable)}>
+      <body className="min-h-full" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }

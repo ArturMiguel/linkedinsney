@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/utils";
 import { SparkleIcon, RocketIcon, CheckIcon, CopyIcon, LinkedinLogoIcon } from "@phosphor-icons/react";
 import { toast } from "sonner";
@@ -53,6 +54,7 @@ export const Translator = ({ onTranslated }: { onTranslated?: () => void }) => {
 
   return (
     <section className="mt-6 pb-16">
+      <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-6 md:grid-cols-2">
           {/* INPUT */}
@@ -140,6 +142,7 @@ export const Translator = ({ onTranslated }: { onTranslated?: () => void }) => {
           </div>
         </div>
       </form>
+      </Container>
     </section>
-  );
+  )
 };
