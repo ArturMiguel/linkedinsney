@@ -1,6 +1,6 @@
-import { jwtDecode } from 'jwt-decode';
-import { cookies } from 'next/headers';
-import { NextResponse } from 'next/server';
+import { jwtDecode } from "jwt-decode";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
@@ -15,11 +15,11 @@ export async function GET() {
       });
     }
 
-    const decoded: any = jwtDecode(token);
+    const decoded = jwtDecode<{ name: string; email: string; picture: string; exp: number }>(token);
 
-    if (decoded.exp && decoded.exp * 1000 < Date.now()) {
+    if (decoded.exp * 1000 < Date.now()) {
       return NextResponse.json({
-        message: "Sessão expirada."
+        message: "Token expirado."
       }, {
         status: 401
       });
@@ -29,13 +29,10 @@ export async function GET() {
       name: decoded.name,
       email: decoded.email,
       picture: decoded.picture,
-    }, {
-      status: 200
     });
-
   } catch {
     return NextResponse.json({
-      message: "Não autenticado."
+      message: "Token inválido."
     }, {
       status: 401
     });

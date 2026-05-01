@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/container";
 import { Logo } from "./Logo";
 import { useAuth } from "@/providers/AuthProvider";
 import { Button } from "./ui/button";
+import { Alert } from "@/lib/Alert";
 
 export const Header = () => {
   const { user, loading, signIn, signOut } = useAuth();
@@ -19,7 +20,11 @@ export const Header = () => {
     google.accounts.id.initialize({
       client_id: process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID,
       callback: async (response: any) => {
-        await signIn(response.credential);
+        try {
+          await signIn(response.credential);
+        } catch (error: any) {
+          Alert.error("", error.response?.data?.message ?? error.message);
+        }
       },
     });
 

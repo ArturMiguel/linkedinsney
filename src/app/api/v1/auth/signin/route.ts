@@ -64,9 +64,12 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({
-      name: userPayload.name,
-      email: userPayload.email,
-      picture: userPayload.picture,
+      user: {
+        name: userPayload.name,
+        email: userPayload.email,
+        picture: userPayload.picture,
+      },
+      token: credential
     }, {
       status: 200
     });

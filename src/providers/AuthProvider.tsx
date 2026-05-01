@@ -35,14 +35,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const signIn = async (credential: string) => {
-    const { data } = await axios.post<User>("/api/v1/auth/signin", {
+    const { data } = await axios.post("/api/v1/auth/signin", {
       type: "GOOGLE",
       google: {
         credential
       },
       keepConected: false,
     });
-    setUser(data);
+
+    setUser(data.user);
   };
 
   const signOut = async () => {

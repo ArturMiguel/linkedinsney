@@ -3,6 +3,7 @@ import { Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { AuthProvider } from "@/providers/AuthProvider";
+import { Toaster } from "sonner";
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
@@ -75,6 +76,7 @@ export default function RootLayout({
       <body className="min-h-full" suppressHydrationWarning>
         <AuthProvider>
           {children}
+          <Toaster position="top-center" richColors closeButton />
         </AuthProvider>
       </body>
     </html>

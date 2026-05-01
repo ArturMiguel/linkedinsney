@@ -1,5 +1,7 @@
+import { jwtDecode } from "jwt-decode";
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
+import { cookies } from "next/headers";
 
 const SYSTEM_PROMPT = `
   Você é um tradutor especializado em transformar textos honestos em posts estilo LinkedIn corporativo exagerado — o chamado \"Linkedisney\".
@@ -20,6 +22,34 @@ const SYSTEM_PROMPT = `
 `;
 
 export async function POST(req: NextRequest) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("linkedinsney_token")?.value;
+
+  if (!token) {
+    return NextResponse.json({
+      error: "Não autenticado."
+    }, {
+      status: 401
+    });
+  }
+
+  try {
+    const decoded = jwtDecode<{ exp: number }>(token);
+    if (decoded.exp * 1000 < Date.now()) {
+      return NextResponse.json({
+        error: "Sessão expirada."
+      }, {
+        status: 401
+      });
+    }
+  } catch {
+    return NextResponse.json({
+      error: "Token inválido."
+    }, {
+      status: 401
+    });
+  }
+
   const { text } = await req.json();
 
   if (!text || typeof text !== "string" || !text.trim()) {
