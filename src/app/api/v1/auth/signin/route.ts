@@ -1,3 +1,4 @@
+import prisma from '@/lib/prisma';
 import { SignInOptionsDTO } from '@/types/SignInOptionsDTO';
 import { SignInTypeEnum } from '@/types/SignInTypeEnum';
 import { jwtDecode } from 'jwt-decode';
@@ -47,6 +48,19 @@ export async function POST(request: NextRequest) {
       secure: process.env.NODE_ENV === "production",
       expires: new Date(decoded.exp! * 1000),
       maxAge: decoded.exp! - decoded.iat!
+    });
+
+    await prisma.user.upsert({
+      where: {
+        email: userPayload.email
+      },
+      update: {
+        name: userPayload.name
+      },
+      create: {
+        email: userPayload.email,
+        name: userPayload.name
+      },
     });
 
     return NextResponse.json({
