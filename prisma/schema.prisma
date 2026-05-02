@@ -23,6 +23,7 @@ model Translation {
   author_id       String
   original_text   String
   translated_text String
+  model           String
   lang            String   @default("pt-br")
   created_at      DateTime @default(now())
   updated_at      DateTime @updatedAt
