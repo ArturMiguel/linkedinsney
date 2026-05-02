@@ -35,13 +35,6 @@
   --color-surface-soft: var(--surface-soft);
   --color-surface-tint: var(--surface-tint);
 
-  /* Charts */
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-
   /* Sidebar */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
@@ -101,13 +94,6 @@
   --shadow-elevated: 0 8px 30px hsl(210 90% 40% / 0.12);
   --gradient-hero: radial-gradient(ellipse at top, hsl(210 100% 97%) 0%, hsl(0 0% 100%) 60%);
 
-  /* Charts — mantidos do projeto original */
-  --chart-1: hsl(210 90% 40%);
-  --chart-2: hsl(210 60% 55%);
-  --chart-3: hsl(210 40% 65%);
-  --chart-4: hsl(51 100% 50%);
-  --chart-5: hsl(215 28% 17%);
-
   --sidebar: hsl(0 0% 98%);
   --sidebar-foreground: hsl(240 5.3% 26.1%);
   --sidebar-primary: hsl(240 5.9% 10%);
@@ -154,12 +140,6 @@
   --shadow-soft: 0 1px 2px hsl(220 13% 5% / 0.25), 0 4px 16px hsl(220 13% 5% / 0.35);
   --shadow-elevated: 0 8px 30px hsl(210 75% 40% / 0.18);
   --gradient-hero: radial-gradient(ellipse at top, hsl(220 13% 19%) 0%, hsl(220 13% 13%) 60%);
-
-  --chart-1: hsl(210 70% 58%);
-  --chart-2: hsl(210 50% 68%);
-  --chart-3: hsl(210 40% 73%);
-  --chart-4: hsl(51 85% 58%);
-  --chart-5: hsl(210 18% 87%);
 
   --sidebar: hsl(220 13% 11%);
   --sidebar-foreground: hsl(210 18% 87%);

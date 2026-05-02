@@ -175,7 +175,7 @@ export default function TermsOfUse() {
         <p className="my-3">
           Para esclarecer dúvidas ou registrar reclamações sobre os Serviços, entre em contato:
         </p>
-        <p>Artur Miguel Rocha — {supportMail}</p>
+        <p>Artur Miguel Rocha - {supportMail}</p>
       </div>
     </>
   );

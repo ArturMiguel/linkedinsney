@@ -144,7 +144,7 @@ export default function PrivacyPolicy() {
         <h4 className="mb-3">Informações coletadas automaticamente</h4>
 
         <p className="my-3">
-          Resumo: Algumas informações — como seu endereço IP e/ou características do navegador e dispositivo —
+          Resumo: Algumas informações - como seu endereço IP e/ou características do navegador e dispositivo -
           são coletadas automaticamente quando você acessa os nossos Serviços.
         </p>
 
@@ -172,7 +172,7 @@ export default function PrivacyPolicy() {
             seu endereço IP, informações do dispositivo, tipo e configurações do navegador,
             além de dados sobre sua atividade nos Serviços (como data e hora de acesso, páginas e arquivos visualizados,
             buscas realizadas, funcionalidades utilizadas), informações sobre eventos do dispositivo
-            (como atividade do sistema, relatórios de erro — também chamados de "crash dumps" — e configurações de hardware).
+            (como atividade do sistema, relatórios de erro - também chamados de "crash dumps" - e configurações de hardware).
           </li>
           <li>
             Dados do dispositivo. Coletamos informações sobre o dispositivo que você utiliza para acessar os Serviços,
@@ -216,7 +216,7 @@ export default function PrivacyPolicy() {
 
         <p className="my-3">
           <b>Finalidade do uso:</b> Esses dados são utilizados exclusivamente para criar e autenticar sua conta no Linkedinsney.
-          Não utilizamos dados da sua conta Google para nenhuma outra finalidade — não analisamos, processamos
+          Não utilizamos dados da sua conta Google para nenhuma outra finalidade - não analisamos, processamos
           nem acessamos conteúdo do Gmail, Google Drive ou qualquer outro serviço Google além do perfil básico de autenticação.
         </p>
 
@@ -416,7 +416,7 @@ export default function PrivacyPolicy() {
           Caso tenha dúvidas ou comentários sobre esta política, envie um e-mail para { supportMail } ou nos escreva para:
         </p>
 
-        <p>Artur Miguel Rocha — { supportMail }</p>
+        <p>Artur Miguel Rocha - { supportMail }</p>
 
         <h3 className="my-3">12. COMO VOCÊ PODE REVISAR, ATUALIZAR OU EXCLUIR OS DADOS QUE COLETAMOS?</h3>
         <p>

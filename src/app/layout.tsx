@@ -13,13 +13,13 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://linkedisney.com.br";
+const siteUrl = "https://linkedinsney.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Linkedisney — Tradutor de Posts para LinkedIn",
-    template: "%s | Linkedisney",
+    default: "Linkedinsney - Tradutor de Posts para LinkedIn",
+    template: "%s | Linkedinsney",
   },
   description:
     "Cole qualquer texto honesto e receba um post corporativo impecável com buzzwords, propósito e emojis. O gerador de posts para LinkedIn com IA que transforma realidade em jornada.",
@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     "gerador de posts LinkedIn",
     "tradutor corporativo",
     "linkedisney",
+    "linkedinsney",
     "posts LinkedIn com IA",
     "buzzwords corporativos",
     "gerador de texto corporativo",
@@ -35,8 +36,8 @@ export const metadata: Metadata = {
     "satirizar LinkedIn",
     "propósito mindset jornada",
   ],
-  authors: [{ name: "Linkedisney" }],
-  creator: "Linkedisney",
+  authors: [{ name: "Linkedinsney" }],
+  creator: "Linkedinsney",
   robots: {
     index: true,
     follow: true,
@@ -49,19 +50,19 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     url: siteUrl,
-    siteName: "Linkedisney",
-    title: "Linkedisney — Tradutor de Posts para LinkedIn",
+    siteName: "Linkedinsney",
+    title: "Linkedinsney - Tradutor de Posts para LinkedIn",
     description: "Seu texto honesto virou propósito. Cole qualquer mensagem e receba um post corporativo cheio de buzzwords e impacto. Powered by IA.",
     images: [
       {
         url: "/logo.png",
-        alt: "Linkedisney — Tradutor de Posts para LinkedIn",
+        alt: "Linkedinsney - Tradutor de Posts para LinkedIn",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Linkedisney — Tradutor de Posts para LinkedIn",
+    title: "Linkedinsney - Tradutor de Posts para LinkedIn",
     description: "Cole seu texto honesto e receba um post corporativo digno do LinkedIn. Buzzwords, propósito e emojis inclusos.",
     images: ["/logo.png"],
   },

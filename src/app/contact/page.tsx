@@ -68,14 +68,6 @@ export default function ContactPage() {
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <EnvelopeSimpleIcon className="h-4 w-4 shrink-0 text-primary" /> linkedinsney@artcode.dev
                   </div>
-                  <a
-                    href="https://www.linkedin.com/in/arturmiguelrocha"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    <LinkedinLogoIcon className="h-4 w-4 shrink-0 text-primary" /> linkedin.com/in/arturmiguelrocha
-                  </a>
                 </div>
               </div>
 
