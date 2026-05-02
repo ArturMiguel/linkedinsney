@@ -19,14 +19,14 @@ export default function PrivacyPolicy() {
 
         <h1>POLÍTICA DE PRIVACIDADE</h1>
 
-        <p className="my-3">Última atualização em 30 de abril de 2026</p>
+        <p className="my-3">Última atualização em 02 de maio de 2026</p>
 
         <p className="my-3">
-          Esta Política de Privacidade da ARTUR MIGUEL ROCHA DESENVOLVIMENTO DE SOFTWARE,
-          CNPJ 43.682.698/0001-85 (operando sob o nome Artcode) ("nós", "nos" ou "nosso"),
-          descreve como e por que podemos acessar, coletar, armazenar, usar e/ou compartilhar
-          ("processar") suas informações pessoais ao utilizar nossos serviços ("Serviços"), incluindo quando você:
+          Esta política descreve como o Linkedinsney coleta, armazena e utiliza suas informações pessoais.
+          O serviço é mantido por Artur Miguel Rocha e pode ser contatado pelo e-mail { supportMail }.
         </p>
+
+        <p className="my-3">Esta política se aplica quando você:</p>
 
         <ul className="list-disc list-inside">
           <li>
@@ -39,7 +39,7 @@ export default function PrivacyPolicy() {
             propósito e emojis, pronto para publicação.
           </li>
           <li>
-            Interage conosco de outras formas relacionadas, incluindo vendas, ações de marketing ou eventos
+            Entra em contato conosco de qualquer outra forma relacionada ao serviço
           </li>
         </ul>
 
@@ -67,7 +67,7 @@ export default function PrivacyPolicy() {
         </p>
 
         <p className="my-3">
-          Coletamos informações de terceiros? Não coletamos nenhuma informação proveniente de terceiros.
+          Coletamos informações de terceiros? Recebemos informações básicas de perfil (nome, e-mail e foto) do Google quando você opta por autenticar-se com sua conta Google. Não coletamos informações de outros terceiros.
         </p>
 
         <p className="my-3">
@@ -127,10 +127,6 @@ export default function PrivacyPolicy() {
         <ul className="list-disc list-inside">
           <li>nomes</li>
           <li>endereços de e-mail</li>
-          <li>nomes de usuário</li>
-          <li>senhas</li>
-          <li>endereços de cobrança</li>
-          <li>números de cartão de débito/crédito</li>
         </ul>
 
         <p className="my-3">
@@ -269,20 +265,12 @@ export default function PrivacyPolicy() {
             produtos e serviços, alterações em nossos termos e políticas, e outras informações semelhantes.
           </li>
           <li>
-            Para enviar comunicações de marketing e promocionais. Podemos processar as informações pessoais que você nos fornece
-            para fins de marketing, conforme suas preferências. Você pode optar por não receber nossos e-mails promocionais a
-            qualquer momento.
-            Para mais informações, veja “QUAIS SÃO SEUS DIREITOS DE PRIVACIDADE?” abaixo.
-          </li>
-          <li>
             Para proteger nossos Serviços. Podemos processar suas informações como parte dos nossos esforços para manter nossos
             Serviços
             seguros e protegidos, incluindo o monitoramento e prevenção de fraudes.
           </li>
           <li>
-            Para avaliar e melhorar nossos Serviços, produtos, marketing e sua experiência. Podemos processar suas informações
-            quando necessário para identificar padrões de uso, avaliar a eficácia de nossas campanhas promocionais
-            e melhorar nossos Serviços, produtos, marketing e sua experiência como usuário.
+            Para avaliar e melhorar nossos Serviços e sua experiência. Podemos processar suas informações para identificar padrões de uso e melhorar as funcionalidades do serviço.
           </li>
           <li>
             Para cumprir obrigações legais. Podemos processar suas informações para cumprir exigências legais,
@@ -322,14 +310,7 @@ export default function PrivacyPolicy() {
         </p>
 
         <p className="my-3">
-          Também permitimos que terceiros e prestadores de serviço utilizem tecnologias de rastreamento em nossos Serviços para fins analíticos
-          e publicitários, como gerenciar e exibir anúncios, personalizar conteúdo conforme seus interesses ou enviar lembretes de carrinhos abandonados
-          (dependendo das suas preferências de comunicação). Esses terceiros utilizam suas próprias tecnologias para apresentar publicidade com base em
-          seus interesses, seja em nossos Serviços ou em outros sites.
-        </p>
-
-        <p className="my-3">
-          Informações específicas sobre como utilizamos essas tecnologias e como recusar determinados cookies estão detalhadas em nosso Aviso de Cookies.
+          Você pode configurar seu navegador para recusar cookies, o que pode impactar algumas funcionalidades do serviço.
         </p>
 
         <h3 className="my-3" id="sociallogins">5. COMO LIDAMOS COM SEUS LOGINS SOCIAIS?</h3>
@@ -394,30 +375,17 @@ export default function PrivacyPolicy() {
           nem, quando permitido por lei, impede o tratamento com base em outras bases legais.
         </p>
 
-        <p className="my-3">
-          Cancelamento de comunicações promocionais: Você pode se descadastrar a qualquer momento clicando no link de cancelamento
-          nos e-mails ou entrando em contato conforme descrito em
-          "<Link className="ml-1 underline underline-offset-2" href="/agreements/privacy-policy#contact">COMO ENTRAR EM CONTATO CONOSCO SOBRE ESTE AVISO?</Link>".
-          Após isso, você será removido das listas promocionais, mas ainda poderemos enviar mensagens importantes sobre o uso dos Serviços ou sua conta.
-        </p>
-
         <h4 className="my-3">Informações da conta</h4>
         <p className="my-3">
           Caso deseje revisar, atualizar ou excluir as informações da sua conta, você pode:
         </p>
         <ul className="list-disc list-inside">
-          <li>Acessar as configurações da sua conta e atualizá-la diretamente.</li>
-          <li>Entrar em contato conosco pelos meios fornecidos.</li>
+          <li>Entrar em contato conosco pelo e-mail { supportMail }.</li>
         </ul>
 
         <p className="my-3">
           Após o pedido de exclusão, desativaremos ou removeremos sua conta e os dados relacionados de nossos sistemas ativos.
           No entanto, podemos manter algumas informações nos nossos arquivos para fins legais, prevenção de fraudes ou investigações.
-        </p>
-
-        <p className="my-3">
-          Cookies e tecnologias similares: A maioria dos navegadores aceita cookies por padrão. Você pode configurar seu navegador para remover ou recusar cookies.
-          Isso pode impactar algumas funcionalidades dos nossos Serviços.
         </p>
 
         <p className="my-3">
@@ -448,9 +416,7 @@ export default function PrivacyPolicy() {
           Caso tenha dúvidas ou comentários sobre esta política, envie um e-mail para { supportMail } ou nos escreva para:
         </p>
 
-        <p>ARTUR MIGUEL ROCHA DESENVOLVIMENTO DE SOFTWARE - CNPJ 43.682.698/0001-85</p>
-        <p>Endereço: Av. Anselmo Alves dos Santos, 1076 - loja 01, CXPST 98, Uberlândia, Minas Gerais 38408-097, Brasil</p>
-        <p>E-mail: { supportMail }</p>
+        <p>Artur Miguel Rocha — { supportMail }</p>
 
         <h3 className="my-3">12. COMO VOCÊ PODE REVISAR, ATUALIZAR OU EXCLUIR OS DADOS QUE COLETAMOS?</h3>
         <p>

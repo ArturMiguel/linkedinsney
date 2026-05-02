@@ -48,7 +48,7 @@ export const Translator = () => {
   };
 
   const handleShare = () => {
-    window.open("https://www.linkedin.com/sharing/share-offsite/?url=https://linkedinsney.com", "_blank", "noopener,noreferrer");
+    window.open(`https://www.linkedin.com/sharing/share-offsite?url=${process.env.NEXT_PUBLIC_SITE}`, "_blank", "noopener,noreferrer");
   };
 
   return (

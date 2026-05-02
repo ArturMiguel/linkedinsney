@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/Loading";
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -12,6 +13,7 @@ type User = {
 type AuthContextType = {
   user: User | null;
   loading: boolean;
+  setLoading: (loading: boolean) => void
   signIn: (credential: string) => Promise<void>;
   signOut: () => Promise<void>;
 };
@@ -22,7 +24,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     axios.get<User>("/api/v1/auth/me").then(({ data }) => {
@@ -52,8 +54,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signOut }}>
-      {children}
-    </AuthContext.Provider>
+    <>
+      {loading == true ? <Loading /> : <></>}
+      <AuthContext.Provider value={{ user, loading, setLoading, signIn, signOut }}>
+        {children}
+      </AuthContext.Provider>
+    </>
   );
 };
