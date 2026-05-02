@@ -8,11 +8,25 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  email      String   @unique
-  name       String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id           String        @id @default(uuid())
+  email        String        @unique
+  name         String
+  created_at   DateTime      @default(now())
+  updated_at   DateTime      @updatedAt
+  translations Translation[]
 
   @@map("users")
+}
+
+model Translation {
+  id              String   @id @default(uuid())
+  author_id       String
+  original_text   String
+  translated_text String
+  lang            String   @default("pt-br")
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  author          User     @relation(fields: [author_id], references: [id])
+
+  @@map("translations")
 } 

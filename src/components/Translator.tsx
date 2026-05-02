@@ -30,10 +30,10 @@ export const Translator = () => {
     setOutput("");
 
     try {
-      const { data } = await axios.post<{ result: string }>("/api/v1/translates", { 
+      const { data } = await axios.post<{ text: string }>("/api/v1/translates", { 
         text: text
       });
-      setOutput(data.result);
+      setOutput(data.text);
     } catch {
       setError("Ops, o propósito saiu de férias. Tente novamente.");
     }
@@ -65,7 +65,7 @@ export const Translator = () => {
                 {...register("text", { required: true, maxLength: MAX })}
                 maxLength={MAX}
                 placeholder="Ex: meu chefe é incompetente e o projeto foi um desastre..."
-                className="min-h-[220px] resize-none rounded-xl border-border bg-background text-base focus-visible:ring-primary"
+                className="h-[220px] resize-none rounded-xl border-border bg-background text-base focus-visible:ring-primary"
               />
               <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
                 <span>Seja honesto. A gente embeleza.</span>

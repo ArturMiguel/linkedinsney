@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma';
+import { AuthService } from '@/lib/AuthService';
 import { SignInOptionsDTO } from '@/types/SignInOptionsDTO';
 import { SignInTypeEnum } from '@/types/SignInTypeEnum';
-import { jwtDecode } from 'jwt-decode';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -26,31 +26,14 @@ export async function POST(request: NextRequest) {
 
     switch (json.type) {
       case SignInTypeEnum.GOOGLE:
-        if (!json.google?.credential) {
-          throw new Error("Credencial Google não informada.")
-        };
+        if (!json.google?.credential) throw new Error("Credencial Google não informada.");
         userPayload = await verifyGoogleToken(json.google.credential);
         break;
       default:
         throw new Error("Tipo de autenticação desconhecido.");
     }
 
-    const credential = json.google!.credential;
-    const decoded = jwtDecode(credential);
-
-    const cookieStore = await cookies();
-    cookieStore.set({
-      name: "linkedinsney_token",
-      value: credential,
-      httpOnly: true,
-      path: "/",
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-      expires: new Date(decoded.exp! * 1000),
-      maxAge: decoded.exp! - decoded.iat!
-    });
-
-    await prisma.user.upsert({
+    const user = await prisma.user.upsert({
       where: {
         email: userPayload.email
       },
@@ -59,17 +42,22 @@ export async function POST(request: NextRequest) {
       },
       create: {
         email: userPayload.email,
-        name: userPayload.name
+        name: userPayload.name,
       },
     });
 
+    const session = {
+      id: user.id,
+      name: userPayload.name,
+      email: userPayload.email,
+      picture: userPayload.picture,
+    };
+    const token = await AuthService.issueToken(session);
+    const cookieStore = await cookies();
+    await AuthService.setSessionCookie(cookieStore, token);
+
     return NextResponse.json({
-      user: {
-        name: userPayload.name,
-        email: userPayload.email,
-        picture: userPayload.picture,
-      },
-      token: credential
+      user: session
     }, {
       status: 200
     });

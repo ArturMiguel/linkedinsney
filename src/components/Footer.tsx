@@ -1,6 +1,6 @@
 "use client"
 
-import { GithubLogoIcon, LinkedinLogoIcon } from "@phosphor-icons/react";
+import { LinkedinLogoIcon } from "@phosphor-icons/react";
 import { Logo } from "./Logo";
 import { Container } from "@/components/ui/container";
 
@@ -24,14 +24,6 @@ export const Footer = () => {
             <a href="/agreements/terms-of-use" target="_blank" className="transition-colors hover:text-foreground">Termos de Uso</a>
           </nav>
           <div className="flex gap-3 md:justify-end">
-            <a
-              href="https://github.com/ArturMiguel"
-              target="_blank"
-              aria-label="Twitter"
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-background text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <GithubLogoIcon className="h-4 w-4" />
-            </a>
             <a
               href="https://www.linkedin.com/in/arturmiguelrocha"
               target="_blank"
