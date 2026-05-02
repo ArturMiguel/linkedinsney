@@ -5,8 +5,10 @@ import { useEffect, useRef } from "react";
 import { Container } from "@/components/ui/container";
 import { Logo } from "./Logo";
 import { useAuth } from "@/providers/AuthProvider";
-import { Button } from "./ui/button";
 import { Alert } from "@/lib/Alert";
+import { ThemeToggle } from "./ThemeToggle";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { SignOutIcon } from "@phosphor-icons/react";
 
 export const Header = () => {
   const { user, loading, signIn, signOut } = useAuth();
@@ -62,20 +64,30 @@ export const Header = () => {
         <Container>
           <div className="flex h-16 items-center justify-between">
             <Logo />
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-x-4">
+              <ThemeToggle />
               {!loading && (
                 user ? (
-                  <>
-                    <img
-                      src={user.picture}
-                      alt={user.name}
-                      className="h-8 w-8 rounded-full"
-                    />
-                    <span className="hidden sm:block text-sm text-foreground">{user.name}</span>
-                    <Button variant="ghost" size="sm" onClick={signOut}>
-                      Sair
-                    </Button>
-                  </>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <img
+                        src={user.picture}
+                        alt={user.name}
+                        className="h-8 w-8 cursor-pointer rounded-full ring-2 ring-transparent transition-all hover:ring-border"
+                      />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-52">
+                      <DropdownMenuLabel className="font-normal">
+                        <p className="truncate text-sm font-medium">{user.name}</p>
+                        <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={signOut} className="cursor-pointer">
+                        <SignOutIcon className="mr-2 h-4 w-4" />
+                        Sair
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 ) : (
                   <div ref={googleBtnRef} />
                 )

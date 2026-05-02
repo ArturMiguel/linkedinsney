@@ -3,6 +3,7 @@ import { Geist, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { AuthProvider } from "@/providers/AuthProvider";
+import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
@@ -72,12 +73,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={cn("h-full", "antialiased", geistSans.variable, jetbrainsMono.variable)}>
+    <html lang="pt-BR" className={cn("h-full", "antialiased", geistSans.variable, jetbrainsMono.variable)} suppressHydrationWarning>
       <body className="min-h-full" suppressHydrationWarning>
-        <AuthProvider>
-          {children}
-          <Toaster position="top-center" richColors closeButton />
-        </AuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
+          <AuthProvider>
+            {children}
+            <Toaster position="top-center" richColors closeButton />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
