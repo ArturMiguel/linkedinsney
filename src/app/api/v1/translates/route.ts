@@ -9,17 +9,16 @@ const SYSTEM_PROMPT = `
   Regras obrigatórias:
   - Identifique o problema ou situação central da mensagem e reescreva-o em primeira pessoa como se fosse uma vivência própria de quem posta — nunca como comentário ou observação sobre outros. O output deve ser autossuficiente: quem lê sem conhecer o input não deve conseguir inferir o que motivou o post
   - Use obrigatoriamente pelo menos 3 buzzwords diferentes a cada resposta, variando sempre entre: jornada, entrega, impacto, propósito, ecossistema, mindset, protagonismo, disruptivo, ressignificar, pertencimento, humanizado, high performance, escala, vulnerabilidade, conexão, legado, curadoria, cocriação
-  - Varie obrigatoriamente a frase de abertura a cada resposta — nunca comece com "Transformar", "As vezes", "Ah", "Hoje percebi" ou qualquer padrão repetido
+  - Varie obrigatoriamente o início do primeiro parágrafo
   - Adote tom de guru corporativo: humilde, grato e inspirador ao mesmo tempo
   - O sarcasmo deve ser implícito: nunca dito, apenas percebido por quem conhece o ambiente corporativo
-  - Adicione uma reflexão filosófica ou chamada para engajamento no final, variando entre: \"E você, já parou para pensar nisso?\", \"Comenta aqui o que você acha 👇\", \"Qual foi o seu aprendizado hoje?\", \"Me conta nos comentários 💬\"
   - Nunca reconheça problemas como problemas — tudo é \"desafio\", \"aprendizado\" ou \"oportunidade de melhoria\"
-  - Sempre use algum emoji que reforçe o sentido da frase. Cada emoji tem significado específico: 🚀 conquista concreta, avanço real, lançamento; 💡 insight genuíno, ideia nova, descoberta; 🙏 gratidão ou reconhecimento a alguém ou algo específico; ✨ transformação significativa, momento especial; 💙 vínculo emocional, pertencimento, comunidade
-  - Não use formatações como negrito, itálico, sublinhado ou qualquer símbolo markdown, incluindo **, __, ##
+  - Nunca use formatações de texto como negrito, itálico, sublinhado ou qualquer símbolo markdown, incluindo **, __, ## — emojis não são formatação e devem ser usados normalmente
+  - Use obrigatoriamente pelo menos 1 emoji por parágrafo, posicionado onde reforce o sentido da frase. Cada emoji tem significado específico e só deve ser usado no contexto correto: 🚀 conquista concreta, avanço real, lançamento; 💡 insight genuíno, ideia nova, descoberta; 🙏 gratidão ou reconhecimento a alguém ou algo específico; ✨ transformação significativa, momento especial; 💙 vínculo emocional, pertencimento, comunidade
   - Use \n para quebras de linha entre parágrafos
-  - Ao final do texto, quebre linha com \n e adicione exatamente 3 hashtags relevantes ao contexto da mensagem, no formato #PalavraChave
   - Responda APENAS com o texto traduzido, sem explicações ou comentários adicionais
-  - O texto deve conter até 3 parágrafos e no máximo 50 palavras em cara parágrafo, sendo o primeiro focado na transformação do problema e o segundo detalhando o aprendizado ou oportunidade, e o terceiro com o engajamento final seguido das hashtags
+  - O texto deve conter até 2 parágrafos, sendo o primeiro focado na transformação do problema e o segundo detalhando o aprendizado ou oportunidade.
+  - Ao final do texto, quebre linha com \n e adicione exatamente 3 hashtags relevantes ao contexto da mensagem, no formato #PalavraChave #PalavraChave2 PalavraChave3
 `;
 
 export async function POST(req: NextRequest) {
@@ -44,45 +43,76 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  const apiUrl = process.env.OLLAMA_API_URL;
-  if (!apiUrl) {
-    return NextResponse.json({
-      message: "API de tradução não está configurada"
-    }, {
-      status: 500
-    });
-  }
+  const ollamaAPI = process.env.OLLAMA_API_URL as string;
+  const ollamaModel = process.env.OLLAMA_API_MODEL as string;
+  const ollamaToken = process.env.OLLAMA_API_TOKEN as string;
 
-  const { data } = await axios.post(`${apiUrl}/api/chat`, {
-    model: process.env.OLLAMA_API_MODEL,
-    think: false,
-    stream: false,
-    messages: [
-      {
-        role: "system",
-        content: SYSTEM_PROMPT
-      },
-      {
-        role: "user",
-        content: text
-      }
-    ]
-  }, {
-    headers: {
-      Authorization: `Bearer ${process.env.OLLAMA_API_TOKEN}`
+  const history = await prisma.translation.findMany({
+    where: {
+      author_id: user.id,
+      model: ollamaModel
+    },
+    orderBy: {
+      created_at: "desc"
+    },
+    take: 5,
+    select: {
+      original_text: true,
+      translated_text: true
+    },
+  })
+
+  const historyMessages = history.reverse().flatMap((translation) => [ // "history" tem os 10 mais recentes, mas reordena para cronológico antes de passar para o modelo
+    {
+      role: "user",
+      content: translation.original_text
+    },
+    {
+      role: "assistant",
+      content: translation.translated_text
     }
-  }).catch((error) => {
-    throw new Error(`Erro ao se comunicar com a API de tradução: ${error.message}`);
-  });
+  ]);
 
-  const translated: string = (data?.message?.content ?? "").replace(/\*/g, "").replace(/<br>/g, "\n\n");
+  let translated: string;
+
+  try {
+    const { data } = await axios.post(`${ollamaAPI}/api/chat`, {
+      model: ollamaModel,
+      think: false,
+      stream: false,
+      options: {
+        temperature: 0.9,
+        repeat_penalty: 1,
+        top_p: 0.95,
+      },
+      messages: [
+        {
+          role: "system",
+          content: SYSTEM_PROMPT
+        },
+        ...historyMessages,
+        {
+          role: "user",
+          content: text
+        }
+      ]
+    }, {
+      headers: {
+        Authorization: `Bearer ${ollamaToken}`
+      },
+    });
+
+    translated = (data?.message?.content ?? "").replace(/\*/g, "").replace(/<br>/g, "\n\n");
+  } catch (error: any) {
+    throw new Error(`Erro ao se comunicar com a API de tradução: ${error.message}`);
+  }
 
   await prisma.translation.create({
     data: {
       author_id: user.id,
       original_text: text,
       translated_text: translated,
-      model: process.env.OLLAMA_API_MODEL as string
+      model: ollamaModel
     },
   });
 
