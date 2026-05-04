@@ -155,11 +155,17 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-mono;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
   }
 }
 
@@ -167,9 +173,11 @@
   .bg-gradient-hero {
     background: var(--gradient-hero);
   }
+
   .shadow-soft {
     box-shadow: var(--shadow-soft);
   }
+
   .shadow-elevated {
     box-shadow: var(--shadow-elevated);
   }

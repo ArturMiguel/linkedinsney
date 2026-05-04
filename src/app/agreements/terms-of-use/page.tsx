@@ -19,7 +19,7 @@ export default function TermsOfUse() {
 
         <h1>TERMOS DE USO</h1>
 
-        <p className="my-3">Última atualização: 02 de maio de 2026</p>
+        <p className="my-3">Última atualização: 30 de abril de 2026</p>
 
         <h3 className="my-3">ACEITAÇÃO DOS TERMOS</h3>
 

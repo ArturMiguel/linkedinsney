@@ -6,7 +6,7 @@ export const Hero = () => {
   return (
     <section className="relative overflow-hidden bg-gradient-hero">
       <Container>
-        <div className="py-14 md:py-20 text-center">
+        <div className="py-14 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground shadow-soft">
             ✨ Transformando realidade em propósito
           </div>
@@ -17,6 +17,10 @@ export const Hero = () => {
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-balance text-lg text-muted-foreground">
             Cole qualquer texto honesto. Receba um post corporativo impecável.
+            <br />
+            <span className="text-sm">
+              Ou cole um post do LinkedIn e descubra o que a pessoa realmente quis dizer.
+            </span>
           </p>
         </div>
       </Container>

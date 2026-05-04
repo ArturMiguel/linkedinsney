@@ -19,7 +19,7 @@ export default function PrivacyPolicy() {
 
         <h1>POLÍTICA DE PRIVACIDADE</h1>
 
-        <p className="my-3">Última atualização em 02 de maio de 2026</p>
+        <p className="my-3">Última atualização em 30 de abril de 2026</p>
 
         <p className="my-3">
           Esta política descreve como o Linkedinsney coleta, armazena e utiliza suas informações pessoais.

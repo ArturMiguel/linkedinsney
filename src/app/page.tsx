@@ -19,8 +19,8 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <Translator />
-        <HowItWorks />
+        <div id="translator" className="scroll-mt-24"><Translator /></div>
+        <div id="how-it-works" className="scroll-mt-24"><HowItWorks /></div>
         <SocialProof />
       </main>
       <Footer />

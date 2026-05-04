@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
@@ -21,8 +22,7 @@ export const metadata: Metadata = {
     default: "Linkedinsney - Tradutor de Posts para LinkedIn",
     template: "%s | Linkedinsney",
   },
-  description:
-    "Cole qualquer texto honesto e receba um post corporativo impecável com buzzwords, propósito e emojis. O gerador de posts para LinkedIn com IA que transforma realidade em jornada.",
+  description: "Cole qualquer texto honesto e receba um post corporativo impecável com buzzwords, propósito e emojis. O gerador de posts para LinkedIn com IA que transforma realidade em jornada.",
   keywords: [
     "gerador de posts LinkedIn",
     "tradutor corporativo",
@@ -74,11 +74,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={cn("h-full", "antialiased", geistSans.variable, jetbrainsMono.variable)} suppressHydrationWarning>
+    <html lang="pt-BR" data-scroll-behavior="smooth" className={cn("h-full", "antialiased", geistSans.variable, jetbrainsMono.variable)} suppressHydrationWarning>
       <body className="min-h-full" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
           <AuthProvider>
-            {children}
+            <TooltipProvider>
+              {children}
+            </TooltipProvider>
             <Toaster position="top-center" richColors closeButton />
           </AuthProvider>
         </ThemeProvider>

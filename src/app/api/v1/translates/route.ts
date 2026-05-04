@@ -4,6 +4,20 @@ import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { cookies } from "next/headers";
 
+const REVERSE_SYSTEM_PROMPT = `
+  Você é um tradutor especializado em decodificar posts estilo LinkedIn corporativo — o chamado "Linkedisney" — revelando o que a pessoa realmente quis dizer.
+  Regras obrigatórias:
+  - Reescreva em primeira pessoa, como uma confissão honesta de quem escreveu o post — sem buzzwords, sem floreios, sem metáforas corporativas
+  - Tom natural e direto, como alguém contando o que aconteceu de verdade para um colega de confiança
+  - O sarcasmo deve ser implícito: não declare que o post era exagerado, deixe a tradução honesta falar por si
+  - Nunca use buzzwords corporativas como jornada, impacto, propósito, mindset, ecossistema, protagonismo, disruptivo, high performance, vulnerabilidade, pertencimento, legado, curadoria, cocriação
+  - Use linguagem simples, direta e cotidiana — sem metáforas, sem adjetivos grandiosos
+  - Nunca use formatações de texto como negrito, itálico, sublinhado ou qualquer símbolo markdown, incluindo **, __, ## — emojis também não devem ser usados
+  - Use \n para quebras de linha entre parágrafos
+  - Responda APENAS com o texto traduzido, sem explicações ou comentários adicionais
+  - O texto deve conter apenas 1 parágrafo com até 40 palavras
+`;
+
 const SYSTEM_PROMPT = `
   Você é um tradutor especializado em transformar textos honestos em posts estilo LinkedIn corporativo exagerado — o chamado \"Linkedisney\".
   Regras obrigatórias:
@@ -33,7 +47,7 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  const { text } = await req.json();
+  const { text, mode = "encode" } = await req.json();
 
   if (!text || typeof text !== "string" || !text.trim() || text.length > 1000) {
     return NextResponse.json({
@@ -47,7 +61,7 @@ export async function POST(req: NextRequest) {
   const ollamaModel = process.env.OLLAMA_API_MODEL as string;
   const ollamaToken = process.env.OLLAMA_API_TOKEN as string;
 
-  const history = await prisma.translation.findMany({
+  const historyMessages = mode === "decode" ? [] : await prisma.translation.findMany({
     where: {
       author_id: user.id,
       model: ollamaModel
@@ -60,9 +74,7 @@ export async function POST(req: NextRequest) {
       original_text: true,
       translated_text: true
     },
-  })
-
-  const historyMessages = history.reverse().flatMap((translation) => [ // "history" tem os 10 mais recentes, mas reordena para cronológico antes de passar para o modelo
+  }).then((history) => history.reverse().flatMap((translation) => [
     {
       role: "user",
       content: translation.original_text
@@ -71,7 +83,9 @@ export async function POST(req: NextRequest) {
       role: "assistant",
       content: translation.translated_text
     }
-  ]);
+  ]));
+
+  const systemPrompt = mode == "decode" ? REVERSE_SYSTEM_PROMPT : SYSTEM_PROMPT;
 
   let translated: string;
 
@@ -88,7 +102,7 @@ export async function POST(req: NextRequest) {
       messages: [
         {
           role: "system",
-          content: SYSTEM_PROMPT
+          content: systemPrompt
         },
         ...historyMessages,
         {
@@ -102,9 +116,16 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    translated = (data?.message?.content ?? "").replace(/\*/g, "").replace(/<br>/g, "\n\n");
+    translated = (data?.message?.content ?? "")
+      .replace(/\*/g, "")
+      .replace(/<br>/g, "\n\n")
+      .replace(/\n\n\n/g, "\n");
   } catch (error: any) {
-    throw new Error(`Erro ao se comunicar com a API de tradução: ${error.message}`);
+    return NextResponse.json({
+      message: "Erro ao processar a tradução. Tente novamente mais tarde."
+    }, {
+      status: 500
+    });
   }
 
   await prisma.translation.create({
@@ -112,11 +133,14 @@ export async function POST(req: NextRequest) {
       author_id: user.id,
       original_text: text,
       translated_text: translated,
-      model: ollamaModel
+      model: ollamaModel,
+      mode: mode
     },
   });
 
   return NextResponse.json({
     text: translated
+  }, {
+    status: 200
   });
 }
