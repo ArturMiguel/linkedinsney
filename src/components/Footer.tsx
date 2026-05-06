@@ -17,6 +17,9 @@ export const Footer = () => {
             <p className="mt-3 text-xs text-muted-foreground">
               © {new Date().getFullYear()} Linkedinsney. Todos os propósitos reservados.
             </p>
+            <p className="mt-2 text-xs text-muted-foreground/60">
+              Ferramenta independente. Não é afiliada, endossada ou associada à LinkedIn Corporation.
+            </p>
           </div>
           <nav className="flex flex-col gap-2 text-sm text-muted-foreground md:items-center">
             <a href="/contact" className="transition-colors hover:text-foreground">Contato</a>

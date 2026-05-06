@@ -7,7 +7,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { ArrowLeftIcon, ClockCounterClockwiseIcon } from "@phosphor-icons/react";
+import { ArrowLeftIcon, ClockCounterClockwiseIcon, LinkedinLogoIcon } from "@phosphor-icons/react";
 import { Alert } from "@/lib/Alert";
 
 type Translation = {
@@ -132,9 +132,21 @@ export default function HistoryPage() {
                         <p className="text-sm text-foreground">{translation.original_text}</p>
                       </div>
                       <div>
-                        <span className={`mb-2 inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${translation.mode === "encode" ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"}`}>
-                          {translation.mode === "encode" ? "Linkedisney" : "Humano"}
-                        </span>
+                        <div className="mb-2 flex items-center gap-x-4">
+                          <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${translation.mode === "encode" ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"}`}>
+                            {translation.mode === "encode" ? "Linkedisney" : "Humano"}
+                          </span>
+                          {translation.mode === "encode" && (
+                            <button
+                              type="button"
+                              onClick={() => window.open(`https://www.linkedin.com/sharing/share-offsite?url=${process.env.NEXT_PUBLIC_SITE}`, "_blank", "noopener,noreferrer")}
+                              className="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-primary"
+                            >
+                              <LinkedinLogoIcon className="h-3.5 w-3.5" />
+                              Compartilhar
+                            </button>
+                          )}
+                        </div>
                         <p className="whitespace-pre-wrap text-sm text-foreground">
                           {translation.translated_text}
                         </p>
