@@ -23,8 +23,8 @@ export const Footer = () => {
           </div>
           <nav className="flex flex-col gap-2 text-sm text-muted-foreground md:items-center">
             <a href="/contact" className="transition-colors hover:text-foreground">Contato</a>
-            <a href="/agreements/privacy-policy" target="_blank" className="transition-colors hover:text-foreground">Política de Privacidade</a>
             <a href="/agreements/terms-of-use" target="_blank" className="transition-colors hover:text-foreground">Termos de Uso</a>
+            <a href="/agreements/privacy-policy" target="_blank" className="transition-colors hover:text-foreground">Política de Privacidade</a>
           </nav>
           <div className="flex gap-3 md:justify-end">
             <a

@@ -68,7 +68,6 @@ export const Header = () => {
             <nav className="hidden items-center gap-x-6 text-sm font-medium text-muted-foreground sm:flex">
               <a href="/#translator" className="transition-colors hover:text-foreground">Traduzir</a>
               <a href="/#how-it-works" className="transition-colors hover:text-foreground">Como funciona?</a>
-              <Link href="/contact" className="transition-colors hover:text-foreground">Contato</Link>
             </nav>
             <div className="flex items-center gap-x-4">
               <ThemeToggle />

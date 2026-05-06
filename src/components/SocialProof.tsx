@@ -3,12 +3,13 @@
 import { ArrowRightIcon } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { Container } from "@/components/ui/container";
+import axios from "axios";
+import { Alert } from "@/lib/Alert";
 
 const examples = [
   {
     input: "Fui demitido hoje. Estou perdido e com medo do futuro.",
-    output:
-      "Hoje encerro um ciclo e abro um novo capítulo cheio de possibilidades. Gratidão pela jornada! 🚀 #NovoComeço #Resiliencia",
+    output: "Hoje encerro um ciclo e abro um novo capítulo cheio de possibilidades. Gratidão pela jornada! 🚀 #NovoComeço #Resiliencia",
   },
   {
     input: "A reunião de 2h podia ter sido um e-mail.",
@@ -37,7 +38,18 @@ function useCountUp(target: number, duration = 1500) {
 }
 
 export const SocialProof = () => {
-  const count = useCountUp(28473);
+  const [target, setTarget] = useState(0);
+
+  const count = useCountUp(target);
+
+  useEffect(() => {
+    axios.get("/api/v1/translates/counts").then(({ data }) => {
+      setTarget(data.data)
+    }).catch((error: any) => {
+      Alert.error("", error.response?.data?.message);
+    });
+  }, []);
+
   return (
     <section className="bg-background py-16">
       <Container>
