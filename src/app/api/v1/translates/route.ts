@@ -35,6 +35,55 @@ const SYSTEM_PROMPT = `
   - Ao final do texto, quebre linha com \n e adicione exatamente 3 hashtags relevantes ao contexto da mensagem, no formato #PalavraChave #PalavraChave2 PalavraChave3
 `;
 
+export async function GET(req: NextRequest) {
+  const cookieStore = await cookies();
+  const user = await AuthService.authenticate(cookieStore);
+
+  if (!user) {
+    return NextResponse.json({
+      message: "Não autenticado."
+    }, {
+      status: 401
+    });
+  }
+
+  const page = Math.max(1, Number(req.nextUrl.searchParams.get("page") ?? "1"));
+  const take = 50;
+  const skip = (page - 1) * take;
+
+  const [data, total] = await Promise.all([
+    prisma.translation.findMany({
+      where: {
+        author_id: user.id
+      },
+      orderBy: {
+        created_at: "desc"
+      },
+      skip,
+      take,
+      select: {
+        id: true,
+        original_text: true,
+        translated_text: true,
+        mode: true,
+        created_at: true,
+      },
+    }),
+    prisma.translation.count({
+      where: {
+        author_id: user.id
+      }
+    }),
+  ]);
+
+  return NextResponse.json({
+    data,
+    total,
+    page,
+    hasMore: skip + data.length < total,
+  });
+}
+
 export async function POST(req: NextRequest) {
   const cookieStore = await cookies();
   const user = await AuthService.authenticate(cookieStore);

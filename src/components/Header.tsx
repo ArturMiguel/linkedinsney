@@ -9,7 +9,7 @@ import { useAuth } from "@/providers/AuthProvider";
 import { Alert } from "@/lib/Alert";
 import { ThemeToggle } from "./ThemeToggle";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { SignOutIcon } from "@phosphor-icons/react";
+import { SignOutIcon, ClockCounterClockwiseIcon } from "@phosphor-icons/react";
 
 export const Header = () => {
   const { user, loading, signIn, signOut } = useAuth();
@@ -87,6 +87,12 @@ export const Header = () => {
                         <p className="truncate text-sm font-medium">{user.name}</p>
                         <p className="truncate text-xs text-muted-foreground">{user.email}</p>
                       </DropdownMenuLabel>
+                      <DropdownMenuItem asChild className="cursor-pointer">
+                        <Link href="/history">
+                          <ClockCounterClockwiseIcon className="mr-2 h-4 w-4" />
+                          Histórico
+                        </Link>
+                      </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={signOut} className="cursor-pointer">
                         <SignOutIcon className="mr-2 h-4 w-4" />
