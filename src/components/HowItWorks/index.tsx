@@ -2,6 +2,7 @@ import Link from "next/link";
 import { LinkedinLogoIcon, MagicWandIcon, ArrowRightIcon, UserIcon } from "@phosphor-icons/react/dist/ssr";
 import { CopyIcon } from "@phosphor-icons/react/dist/ssr";
 import { Container } from "@/components/ui/container";
+import type { Icon } from "@phosphor-icons/react";
 
 const encodeSteps = [
   { icon: CopyIcon, title: "Cole seu texto", desc: "Aquela verdade nua e crua." },
@@ -16,7 +17,7 @@ const decodeSteps = [
 ];
 
 const ModeLabel = ({ from, to }: { from: string; to: string }) => (
-  <div className="mb-6 flex items-center gap-2">
+  <div className="mb-4 flex items-center gap-2">
     <span className="rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold text-foreground shadow-soft">
       {from}
     </span>
@@ -27,21 +28,20 @@ const ModeLabel = ({ from, to }: { from: string; to: string }) => (
   </div>
 );
 
-const StepCards = ({ steps }: { steps: typeof encodeSteps }) => (
-  <div className="grid gap-6 md:grid-cols-3">
+const StepList = ({ steps }: { steps: { icon: Icon; title: string; desc: string }[] }) => (
+  <div className="space-y-3">
     {steps.map((s, i) => (
-      <div
-        key={s.title}
-        className="rounded-2xl border border-border bg-card p-6 text-center shadow-soft transition-shadow hover:shadow-elevated"
-      >
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-          <s.icon className="h-6 w-6" />
+      <div key={s.title} className="flex items-start gap-3">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+          <s.icon className="h-4 w-4" />
         </div>
-        <div className="mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Passo {i + 1}
+        <div className="min-w-0">
+          <p className="text-sm font-semibold text-foreground">
+            <span className="mr-1.5 text-xs text-muted-foreground">{i + 1}.</span>
+            {s.title}
+          </p>
+          <p className="text-xs text-muted-foreground">{s.desc}</p>
         </div>
-        <h3 className="mt-1 text-lg font-semibold text-foreground">{s.title}</h3>
-        <p className="mt-1 text-sm text-muted-foreground">{s.desc}</p>
       </div>
     ))}
   </div>
@@ -49,24 +49,27 @@ const StepCards = ({ steps }: { steps: typeof encodeSteps }) => (
 
 export const HowItWorks = () => {
   return (
-    <section className="bg-surface-soft py-16">
+    <section className="bg-surface-soft py-12">
       <Container>
         <h2 className="text-center text-2xl font-bold text-foreground sm:text-3xl">
           Como funciona
         </h2>
         <p className="mt-2 text-center text-muted-foreground">
-          O Linkedinsney é um tradutor de textos alimentado por inteligência artificial.
-          Transforme textos honestos em posts corporativos impecáveis, ou cole um post do LinkedIn e descubra o que a pessoa realmente quis dizer.
+          Transforme textos honestos em posts corporativos ou descubra o que alguém realmente quis dizer.
         </p>
-        <div className="mt-10">
-          <ModeLabel from="Humano" to="LinkedIn" />
-          <StepCards steps={encodeSteps} />
+
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-soft">
+            <ModeLabel from="Humano" to="LinkedIn" />
+            <StepList steps={encodeSteps} />
+          </div>
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-soft">
+            <ModeLabel from="LinkedIn" to="Humano" />
+            <StepList steps={decodeSteps} />
+          </div>
         </div>
-        <div className="mt-10">
-          <ModeLabel from="LinkedIn" to="Humano" />
-          <StepCards steps={decodeSteps} />
-        </div>
-        <p className="mt-10 text-center text-xs text-muted-foreground">
+
+        <p className="mt-6 text-center text-xs text-muted-foreground">
           Ao usar o Linkedinsney, você concorda com nossos{" "}
           <Link href="/agreements/terms-of-use" className="underline underline-offset-2 hover:text-foreground">
             Termos de Uso
