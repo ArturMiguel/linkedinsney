@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import { cookies } from "next/headers";
+import { getTranslations } from "next-intl/server";
 
 const REVERSE_SYSTEM_PROMPT = `
   Você é um tradutor especializado em decodificar posts estilo LinkedIn corporativo — o chamado "Linkedisney" — revelando o que a pessoa realmente quis dizer.
@@ -42,8 +43,9 @@ export async function GET(req: NextRequest) {
   const user = await AuthService.authenticate(cookieStore);
 
   if (!user) {
+    const t = await getTranslations("api");
     return NextResponse.json({
-      message: "Não autenticado."
+      message: t("notAuthenticated")
     }, {
       status: 401
     });
@@ -88,11 +90,12 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const cookieStore = await cookies();
+  const t = await getTranslations("api");
   const user = await AuthService.authenticate(cookieStore);
 
   if (!user) {
     return NextResponse.json({
-      message: "Não autenticado."
+      message: t("notAuthenticated")
     }, {
       status: 401
     });
@@ -102,7 +105,7 @@ export async function POST(req: NextRequest) {
 
   if (!text || typeof text !== "string" || !text.trim() || text.length > 1000) {
     return NextResponse.json({
-      message: "Informe o texto a ser traduzido (1-1000 caracteres)."
+      message: t("invalidText")
     }, {
       status: 400
     });
@@ -137,6 +140,7 @@ export async function POST(req: NextRequest) {
   ]));
 
   const systemPrompt = mode == "decode" ? REVERSE_SYSTEM_PROMPT : SYSTEM_PROMPT;
+  const promptLanguage = cookieStore.get("linkedinsney_locale")?.value;
 
   let translated: string;
 
@@ -154,6 +158,14 @@ export async function POST(req: NextRequest) {
         {
           role: "system",
           content: systemPrompt
+        },
+        {
+          role: "system",
+          content: `Independentemente do idioma utilizado pelo usuário na mensagem de entrada, todas as respostas devem ser geradas exclusivamente no idioma ${promptLanguage}.
+            - Nunca altere o idioma de saída com base no idioma detectado na entrada do usuário.
+            - Caso o usuário envie mensagens em outros idiomas, interprete normalmente o conteúdo, mas responda sempre em XPTO.
+            - Essa regra possui prioridade máxima e deve ser seguida em todas as interações.
+          `
         },
         ...historyMessages,
         {
@@ -173,7 +185,7 @@ export async function POST(req: NextRequest) {
       .replace(/\n\n\n/g, "\n");
   } catch (error: any) {
     return NextResponse.json({
-      message: "Erro ao processar a tradução. Tente novamente mais tarde."
+      message: t("translationError")
     }, {
       status: 500
     });
@@ -185,7 +197,8 @@ export async function POST(req: NextRequest) {
       original_text: text,
       translated_text: translated,
       model: ollamaModel,
-      mode: mode
+      mode: mode,
+      lang: promptLanguage
     },
   });
 

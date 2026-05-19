@@ -4,15 +4,16 @@ import { SignInOptionsDTO } from '@/types/SignInOptionsDTO';
 import { SignInTypeEnum } from '@/types/SignInTypeEnum';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
+import { getTranslations } from 'next-intl/server';
 
-async function verifyGoogleToken(credential: string) {
+async function verifyGoogleToken(credential: string, t: Awaited<ReturnType<typeof getTranslations>>) {
   const response = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${credential}`);
-  if (!response.ok) throw new Error("Token do Google inválido.");
+  if (!response.ok) throw new Error(t("invalidGoogleToken"));
 
   const payload = await response.json();
 
   if (payload.aud !== process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID) {
-    throw new Error("Token não pertence a este aplicativo.");
+    throw new Error(t("tokenMismatch"));
   }
 
   return payload;
@@ -20,17 +21,18 @@ async function verifyGoogleToken(credential: string) {
 
 export async function POST(request: NextRequest) {
   try {
+    const t = await getTranslations("api");
     const json: SignInOptionsDTO = await request.json();
 
     let userPayload: any = null;
 
     switch (json.type) {
       case SignInTypeEnum.GOOGLE:
-        if (!json.google?.credential) throw new Error("Credencial Google não informada.");
-        userPayload = await verifyGoogleToken(json.google.credential);
+        if (!json.google?.credential) throw new Error(t("googleCredentialMissing"));
+        userPayload = await verifyGoogleToken(json.google.credential, t);
         break;
       default:
-        throw new Error("Tipo de autenticação desconhecido.");
+        throw new Error(t("unknownAuthType"));
     }
 
     const user = await prisma.user.upsert({

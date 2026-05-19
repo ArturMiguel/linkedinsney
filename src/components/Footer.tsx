@@ -3,8 +3,11 @@
 import { LinkedinLogoIcon } from "@phosphor-icons/react";
 import { Logo } from "./Logo";
 import { Container } from "@/components/ui/container";
+import { useTranslations } from "next-intl";
 
 export const Footer = () => {
+  const t = useTranslations("footer");
+
   return (
     <footer className="border-t border-border bg-surface-soft">
       <Container>
@@ -12,19 +15,19 @@ export const Footer = () => {
           <div>
             <Logo />
             <p className="mt-3 max-w-xs text-sm text-muted-foreground">
-              Transformando realidade em propósito desde já.
+              {t("tagline")}
             </p>
             <p className="mt-3 text-xs text-muted-foreground">
-              © {new Date().getFullYear()} Linkedinsney. Todos os propósitos reservados.
+              {t("copyright", { year: new Date().getFullYear() })}
             </p>
             <p className="mt-2 text-xs text-muted-foreground/60">
-              Ferramenta independente. Não é afiliada, endossada ou associada à LinkedIn Corporation.
+              {t("disclaimer")}
             </p>
           </div>
           <nav className="flex flex-col gap-2 text-sm text-muted-foreground md:items-center">
-            <a href="/contact" className="transition-colors hover:text-foreground">Contato</a>
-            <a href="/agreements/terms-of-use" target="_blank" className="transition-colors hover:text-foreground">Termos de Uso</a>
-            <a href="/agreements/privacy-policy" target="_blank" className="transition-colors hover:text-foreground">Política de Privacidade</a>
+            <a href="/contact" className="transition-colors hover:text-foreground">{t("contact")}</a>
+            <a href="/agreements/terms-of-use" target="_blank" className="transition-colors hover:text-foreground">{t("termsOfUse")}</a>
+            <a href="/agreements/privacy-policy" target="_blank" className="transition-colors hover:text-foreground">{t("privacyPolicy")}</a>
           </nav>
           <div className="flex gap-3 md:justify-end">
             <a

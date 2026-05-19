@@ -11,12 +11,14 @@ import { toast } from "sonner";
 import axios from "axios";
 import { useAuth } from "@/providers/AuthProvider";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { useTranslations } from "next-intl";
 
 const MAX = 1000;
 
 type TranslatorForm = { text: string };
 
 export const Translator = () => {
+  const t = useTranslations("translator");
   const { user } = useAuth();
   const { register, handleSubmit, watch, formState: { isSubmitting } } = useForm<TranslatorForm>({ defaultValues: { text: "" } });
 
@@ -38,7 +40,7 @@ export const Translator = () => {
       });
       setOutput(data.text);
     } catch {
-      setError("Ops, o propósito saiu de férias. Tente novamente.");
+      setError(t("error"));
     }
   };
 
@@ -46,7 +48,7 @@ export const Translator = () => {
     if (!output) return;
     await navigator.clipboard.writeText(output);
     setCopied(true);
-    toast("Copiado!", { description: "Cole no LinkedIn e colha os likes." });
+    toast(t("copiedToast"), { description: t("copiedToastDesc") });
     setTimeout(() => setCopied(false), 1800);
   };
 
@@ -60,10 +62,10 @@ export const Translator = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4 flex items-center justify-center gap-3">
             <span className={cn("pt-4 text-sm font-semibold", mode === "encode" ? "text-primary" : "text-muted-foreground")}>
-              Humano
+              {t("modeHuman")}
             </span>
             <div className="flex flex-col items-center gap-1">
-              <span className="text-xs text-muted-foreground">Modo</span>
+              <span className="text-xs text-muted-foreground">{t("modeLabel")}</span>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <button
@@ -76,7 +78,7 @@ export const Translator = () => {
                   </button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Alternar modo</p>
+                  <p>{t("toggleMode")}</p>
                 </TooltipContent>
               </Tooltip>
             </div>
@@ -88,16 +90,16 @@ export const Translator = () => {
             {/* INPUT */}
             <div className="rounded-2xl border border-border bg-card p-5 shadow-soft md:p-6">
               <label className="mb-2 block text-sm font-semibold text-foreground">
-                {mode === "decode" ? "Cole o post do LinkedIn" : "O que você realmente quer dizer"}
+                {mode === "decode" ? t("inputLabelDecode") : t("inputLabelEncode")}
               </label>
               <Textarea
                 {...register("text", { required: true, maxLength: MAX })}
                 maxLength={MAX}
-                placeholder={mode === "decode" ? "Ex: Hoje fui protagonista da minha jornada de impacto..." : "Ex: meu chefe é incompetente e o projeto foi um desastre..."}
+                placeholder={mode === "decode" ? t("placeholderDecode") : t("placeholderEncode")}
                 className="h-[220px] resize-none rounded-xl border-border bg-background text-base focus-visible:ring-primary"
               />
               <div className="mt-2 flex items-center justify-between text-xs text-muted-foreground">
-                <span>{mode === "decode" ? "Cole qualquer textão corporativo." : "Seja honesto. A gente embeleza."}</span>
+                <span>{mode === "decode" ? t("hintDecode") : t("hintEncode")}</span>
                 <span className={cn(text.length > MAX * 0.9 && "text-destructive")}>
                   {text.length}/{MAX}
                 </span>
@@ -110,11 +112,11 @@ export const Translator = () => {
                 {isSubmitting ? (
                   <>
                     <ArrowClockwiseIcon className="mr-2 h-5 w-5 animate-spin" />
-                    {mode === "decode" ? "Removendo propósito..." : "Adicionando propósito..."}
+                    {mode === "decode" ? t("submittingDecode") : t("submittingEncode")}
                   </>
                 ) : (
                   <>
-                    {mode === "decode" ? "Traduzir sem Enrolação" : "Traduzir para Linkedisney"}
+                    {mode === "decode" ? t("buttonDecode") : t("buttonEncode")}
                     {user ? <RocketIcon className="ml-2 h-5 w-5" /> : <LockSimpleIcon className="ml-2 h-5 w-5" />}
                   </>
                 )}
@@ -122,7 +124,7 @@ export const Translator = () => {
 
               {!user && (
                 <p className="mt-3 text-center text-sm text-bold-foreground">
-                  Entre com sua conta Google para desbloquear a tradução ✨
+                  {t("loginRequired")}
                 </p>
               )}
             </div>
@@ -130,7 +132,7 @@ export const Translator = () => {
             {/* OUTPUT */}
             <div className="rounded-2xl border border-border bg-surface-tint p-5 shadow-soft md:p-6">
               <div className="mb-2 flex items-center justify-between">
-                <label className="text-sm font-semibold text-foreground">{mode === "decode" ? "O que a pessoa realmente quis dizer" : "Versão Linkedisney"}</label>
+                <label className="text-sm font-semibold text-foreground">{mode === "decode" ? t("outputLabelDecode") : t("outputLabelEncode")}</label>
                 {output && (
                   <button
                     type="button"
@@ -138,7 +140,7 @@ export const Translator = () => {
                     className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {copied ? <CheckIcon className="h-3.5 w-3.5 text-primary" /> : <CopyIcon className="h-3.5 w-3.5" />}
-                    {copied ? "Copiado" : "Copiar"}
+                    {copied ? t("copied") : t("copy")}
                   </button>
                 )}
               </div>
@@ -159,7 +161,7 @@ export const Translator = () => {
                 ) : (
                   <div className="flex h-full min-h-[180px] flex-col items-center justify-center text-center text-muted-foreground">
                     <SparkleIcon className="mb-2 h-8 w-8 text-accent" weight="fill" />
-                    <p className="text-sm">{mode === "decode" ? "A confissão honesta aparece aqui" : "Sua versão corporativa aparece aqui ✨"}</p>
+                    <p className="text-sm">{mode === "decode" ? t("emptyDecode") : t("emptyEncode")}</p>
                   </div>
                 )}
               </div>
@@ -173,7 +175,7 @@ export const Translator = () => {
                   className="mt-4 h-11 w-full rounded-xl border-primary/30 text-primary hover:bg-primary/5 hover:text-primary"
                 >
                   <LinkedinLogoIcon className="mr-2 h-4 w-4" />
-                  Compartilhar no LinkedIn
+                  {t("shareLinkedIn")}
                 </Button>
               )}
             </div>

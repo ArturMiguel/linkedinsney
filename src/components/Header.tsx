@@ -8,10 +8,13 @@ import { Logo } from "./Logo";
 import { useAuth } from "@/providers/AuthProvider";
 import { Alert } from "@/lib/Alert";
 import { ThemeToggle } from "./ThemeToggle";
+import { LocaleSwitcher } from "./LocaleSwitcher";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { SignOutIcon, ClockCounterClockwiseIcon } from "@phosphor-icons/react";
+import { useTranslations } from "next-intl";
 
 export const Header = () => {
+  const t = useTranslations("header");
   const { user, loading, signIn, signOut } = useAuth();
   const googleBtnRef = useRef<HTMLDivElement>(null);
   const gsiInitialized = useRef(false);
@@ -66,11 +69,12 @@ export const Header = () => {
           <div className="flex h-16 items-center justify-between">
             <Logo />
             <nav className="hidden items-center gap-x-6 text-sm font-medium text-muted-foreground sm:flex">
-              <a href="/#translator" className="transition-colors hover:text-foreground">Traduzir</a>
-              <a href="/#how-it-works" className="transition-colors hover:text-foreground">Como funciona?</a>
+              <a href="/#translator" className="transition-colors hover:text-foreground">{t("translate")}</a>
+              <a href="/#how-it-works" className="transition-colors hover:text-foreground">{t("howItWorks")}</a>
             </nav>
             <div className="flex items-center gap-x-4">
               <ThemeToggle />
+              <LocaleSwitcher />
               {!loading && (
                 user ? (
                   <DropdownMenu>
@@ -89,13 +93,13 @@ export const Header = () => {
                       <DropdownMenuItem asChild className="cursor-pointer">
                         <Link href="/history">
                           <ClockCounterClockwiseIcon className="mr-2 h-4 w-4" />
-                          Histórico
+                          {t("history")}
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={signOut} className="cursor-pointer">
                         <SignOutIcon className="mr-2 h-4 w-4" />
-                        Sair
+                        {t("signOut")}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

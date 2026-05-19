@@ -1,0 +1,140 @@
+{
+  "header": {
+    "translate": "Translate",
+    "howItWorks": "How it works?",
+    "history": "History",
+    "signOut": "Sign out"
+  },
+  "hero": {
+    "badge": "Turning reality into purpose",
+    "titleLine1": "Your boss won't get it.",
+    "titleLine2": "LinkedIn will love it.",
+    "description": "Paste any honest text. Get a flawless corporate post.",
+    "descriptionSub": "Or paste a LinkedIn post and find out what the person really meant."
+  },
+  "translator": {
+    "modeHuman": "Human",
+    "modeLinkedIn": "LinkedIn",
+    "modeLabel": "Mode",
+    "toggleMode": "Toggle mode",
+    "inputLabelDecode": "Paste the LinkedIn post",
+    "inputLabelEncode": "What you really mean",
+    "placeholderDecode": "E.g.: Today I leveraged my synergies to drive impact...",
+    "placeholderEncode": "E.g.: my boss is clueless and the project was a disaster...",
+    "hintDecode": "Paste any corporate jargon.",
+    "hintEncode": "Be honest. We'll polish it.",
+    "submittingDecode": "Removing purpose...",
+    "submittingEncode": "Adding purpose...",
+    "buttonDecode": "Translate without BS",
+    "buttonEncode": "Translate to Linkedisney",
+    "loginRequired": "Sign in with Google to unlock translation ✨",
+    "outputLabelDecode": "What the person really meant",
+    "outputLabelEncode": "Linkedisney version",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copiedToast": "Copied!",
+    "copiedToastDesc": "Paste it on LinkedIn and harvest the likes.",
+    "emptyDecode": "The honest confession appears here",
+    "emptyEncode": "Your corporate version appears here ✨",
+    "shareLinkedIn": "Share on LinkedIn",
+    "error": "Oops, purpose went on vacation. Try again."
+  },
+  "howItWorks": {
+    "title": "How it works",
+    "description": "Turn honest texts into corporate posts or find out what someone really meant.",
+    "human": "Human",
+    "linkedIn": "LinkedIn",
+    "encode": {
+      "step1": { "title": "Paste your text", "desc": "The raw, unfiltered truth." },
+      "step2": { "title": "Click translate", "desc": "The magic of purpose happens." },
+      "step3": { "title": "Post on LinkedIn", "desc": "Receive likes and corporate hugs." }
+    },
+    "decode": {
+      "step1": { "title": "Paste the LinkedIn post", "desc": "That wall of text full of purpose." },
+      "step2": { "title": "Click translate", "desc": "The magic of corporate undressing." },
+      "step3": { "title": "Read the confession", "desc": "What the person really meant." }
+    },
+    "agreement": "By using Linkedinsney, you agree to our",
+    "termsOfUse": "Terms of Use",
+    "and": "and our",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "socialProof": {
+    "counter": "corporate posts already translated with purpose ✨",
+    "exampleLabel": "LINKEDISNEY VERSION",
+    "examples": [
+      {
+        "input": "I got fired today. I'm lost and scared of the future.",
+        "output": "Today I close a chapter and open a new one full of possibilities. Grateful for the journey! 🚀 #NewBeginnings #Resilience"
+      },
+      {
+        "input": "The 2-hour meeting could have been an email.",
+        "output": "Today I participated in a transformative strategic alignment. Communication is everything! 💙 #Leadership #Collaboration"
+      },
+      {
+        "input": "Worked over the weekend again. I'm exhausted.",
+        "output": "Dedication knows no schedule. Those who love what they do turn Saturday into purpose. 🙏 #Mindset #Gratitude"
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Turning reality into purpose since day one.",
+    "copyright": "© {year} Linkedinsney. All purposes reserved.",
+    "disclaimer": "Independent tool. Not affiliated with, endorsed by, or associated with LinkedIn Corporation.",
+    "contact": "Contact",
+    "termsOfUse": "Terms of Use",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "history": {
+    "title": "Translation History",
+    "description": "Your previous translations, from most recent to oldest.",
+    "modeHuman": "Human",
+    "modeLinkedIn": "LinkedIn",
+    "modeLinkedisney": "Linkedisney",
+    "empty": "No translations yet.",
+    "emptyHint": "Go back to the",
+    "emptyLink": "home page",
+    "emptyHintEnd": "and make your first translation.",
+    "loadMore": "Load more",
+    "loading": "Loading...",
+    "share": "Share"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Found a bug, have a suggestion, or want to close your account? Get in touch.",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "selectSubject": "Select a subject",
+    "subjects": {
+      "serviceQuestions": "Questions about the service",
+      "suggestions": "Suggestions and improvements",
+      "reportBug": "Report a bug",
+      "accountClosure": "Account closure",
+      "other": "Other subjects"
+    },
+    "messagePlaceholder": "Describe your question or suggestion with the honesty LinkedIn would never allow...",
+    "submitting": "Sending...",
+    "submit": "Send message",
+    "successTitle": "Message received!",
+    "successDescription": "We'll get back to you as soon as possible.",
+    "sendAnother": "Send another message",
+    "errorMessage": "Could not send your message. Try again or write directly to linkedinsney@artcode.dev."
+  },
+  "api": {
+    "notAuthenticated": "Not authenticated.",
+    "invalidText": "Enter the text to be translated (1-1000 characters).",
+    "translationError": "Error processing translation. Try again later.",
+    "fillAllFields": "Fill in all fields.",
+    "messageTooLong": "Message too long.",
+    "invalidGoogleToken": "Invalid Google token.",
+    "tokenMismatch": "Token does not belong to this application.",
+    "googleCredentialMissing": "Google credential not provided.",
+    "unknownAuthType": "Unknown authentication type."
+  },
+  "common": {
+    "themeToggle": "Toggle theme",
+    "languageToggle": "Language"
+  }
+}

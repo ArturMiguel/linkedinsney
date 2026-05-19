@@ -1,0 +1,140 @@
+{
+  "header": {
+    "translate": "Traducir",
+    "howItWorks": "¿Cómo funciona?",
+    "history": "Historial",
+    "signOut": "Salir"
+  },
+  "hero": {
+    "badge": "Transformando realidad en propósito",
+    "titleLine1": "Tu jefe no lo va a entender.",
+    "titleLine2": "A LinkedIn le va a encantar.",
+    "description": "Pega cualquier texto honesto. Recibe un post corporativo impecable.",
+    "descriptionSub": "O pega un post de LinkedIn y descubre lo que la persona realmente quiso decir."
+  },
+  "translator": {
+    "modeHuman": "Humano",
+    "modeLinkedIn": "LinkedIn",
+    "modeLabel": "Modo",
+    "toggleMode": "Cambiar modo",
+    "inputLabelDecode": "Pega el post de LinkedIn",
+    "inputLabelEncode": "Lo que realmente quieres decir",
+    "placeholderDecode": "Ej: Hoy fui protagonista de mi journey de impacto...",
+    "placeholderEncode": "Ej: mi jefe es incompetente y el proyecto fue un desastre...",
+    "hintDecode": "Pega cualquier texto corporativo.",
+    "hintEncode": "Sé honesto. Nosotros lo embellecemos.",
+    "submittingDecode": "Quitando propósito...",
+    "submittingEncode": "Añadiendo propósito...",
+    "buttonDecode": "Traducir sin rodeos",
+    "buttonEncode": "Traducir a Linkedisney",
+    "loginRequired": "Inicia sesión con Google para desbloquear la traducción ✨",
+    "outputLabelDecode": "Lo que la persona realmente quiso decir",
+    "outputLabelEncode": "Versión Linkedisney",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "copiedToast": "¡Copiado!",
+    "copiedToastDesc": "Pégalo en LinkedIn y cosecha los likes.",
+    "emptyDecode": "La confesión honesta aparece aquí",
+    "emptyEncode": "Tu versión corporativa aparece aquí ✨",
+    "shareLinkedIn": "Compartir en LinkedIn",
+    "error": "Ups, el propósito se fue de vacaciones. Inténtalo de nuevo."
+  },
+  "howItWorks": {
+    "title": "Cómo funciona",
+    "description": "Transforma textos honestos en posts corporativos o descubre lo que alguien realmente quiso decir.",
+    "human": "Humano",
+    "linkedIn": "LinkedIn",
+    "encode": {
+      "step1": { "title": "Pega tu texto", "desc": "La verdad desnuda y cruda." },
+      "step2": { "title": "Haz clic en traducir", "desc": "La magia del propósito ocurre." },
+      "step3": { "title": "Publica en LinkedIn", "desc": "Recibe likes y abrazos corporativos." }
+    },
+    "decode": {
+      "step1": { "title": "Pega el post de LinkedIn", "desc": "Ese textazo lleno de propósito." },
+      "step2": { "title": "Haz clic en traducir", "desc": "La magia del desnudamiento corporativo." },
+      "step3": { "title": "Lee la confesión", "desc": "Lo que la persona realmente quiso decir." }
+    },
+    "agreement": "Al usar Linkedinsney, aceptas nuestros",
+    "termsOfUse": "Términos de Uso",
+    "and": "y nuestra",
+    "privacyPolicy": "Política de Privacidad"
+  },
+  "socialProof": {
+    "counter": "posts corporativos ya traducidos con propósito ✨",
+    "exampleLabel": "VERSIÓN LINKEDISNEY",
+    "examples": [
+      {
+        "input": "Me despidieron hoy. Estoy perdido y con miedo al futuro.",
+        "output": "Hoy cierro un ciclo y abro un nuevo capítulo lleno de posibilidades. ¡Gratitud por el camino recorrido! 🚀 #NuevoComienzo #Resiliencia"
+      },
+      {
+        "input": "La reunión de 2 horas podría haber sido un email.",
+        "output": "Hoy participé en una alineación estratégica transformadora. ¡La comunicación lo es todo! 💙 #Liderazgo #Colaboración"
+      },
+      {
+        "input": "Trabajé el fin de semana otra vez. Estoy agotado.",
+        "output": "La dedicación no tiene horario. Quien ama lo que hace, transforma el sábado en propósito. 🙏 #Mindset #Gratitud"
+      }
+    ]
+  },
+  "footer": {
+    "tagline": "Transformando realidad en propósito desde ya.",
+    "copyright": "© {year} Linkedinsney. Todos los propósitos reservados.",
+    "disclaimer": "Herramienta independiente. No está afiliada, respaldada ni asociada a LinkedIn Corporation.",
+    "contact": "Contacto",
+    "termsOfUse": "Términos de Uso",
+    "privacyPolicy": "Política de Privacidad"
+  },
+  "history": {
+    "title": "Historial de Traducciones",
+    "description": "Tus traducciones anteriores, de la más reciente a la más antigua.",
+    "modeHuman": "Humano",
+    "modeLinkedIn": "LinkedIn",
+    "modeLinkedisney": "Linkedisney",
+    "empty": "Ninguna traducción aún.",
+    "emptyHint": "Vuelve a la",
+    "emptyLink": "página principal",
+    "emptyHintEnd": "y haz tu primera traducción.",
+    "loadMore": "Cargar más",
+    "loading": "Cargando...",
+    "share": "Compartir"
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "description": "¿Encontraste un bug, tienes una sugerencia o quieres cerrar tu cuenta? Escríbenos.",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "subject": "Asunto",
+    "message": "Mensaje",
+    "selectSubject": "Selecciona un asunto",
+    "subjects": {
+      "serviceQuestions": "Dudas sobre el servicio",
+      "suggestions": "Sugerencias y mejoras",
+      "reportBug": "Reportar un bug",
+      "accountClosure": "Cierre de cuenta",
+      "other": "Otros asuntos"
+    },
+    "messagePlaceholder": "Describe tu duda o sugerencia con la honestidad que LinkedIn nunca permitiría...",
+    "submitting": "Enviando...",
+    "submit": "Enviar mensaje",
+    "successTitle": "¡Mensaje recibido!",
+    "successDescription": "Te responderemos lo antes posible.",
+    "sendAnother": "Enviar otro mensaje",
+    "errorMessage": "No fue posible enviar tu mensaje. Inténtalo de nuevo o escribe directamente a linkedinsney@artcode.dev."
+  },
+  "api": {
+    "notAuthenticated": "No autenticado.",
+    "invalidText": "Ingresa el texto a traducir (1-1000 caracteres).",
+    "translationError": "Error al procesar la traducción. Inténtalo más tarde.",
+    "fillAllFields": "Completa todos los campos.",
+    "messageTooLong": "Mensaje demasiado largo.",
+    "invalidGoogleToken": "Token de Google inválido.",
+    "tokenMismatch": "El token no pertenece a esta aplicación.",
+    "googleCredentialMissing": "Credencial de Google no proporcionada.",
+    "unknownAuthType": "Tipo de autenticación desconocido."
+  },
+  "common": {
+    "themeToggle": "Cambiar tema",
+    "languageToggle": "Idioma"
+  }
+}

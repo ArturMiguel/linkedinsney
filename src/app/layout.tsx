@@ -6,6 +6,8 @@ import { AuthProvider } from "@/providers/AuthProvider";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale } from "next-intl/server";
 
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
@@ -68,21 +70,25 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
-    <html lang="pt-BR" data-scroll-behavior="smooth" className={cn("h-full", "antialiased", geistSans.variable, jetbrainsMono.variable)} suppressHydrationWarning>
+    <html lang={locale} data-scroll-behavior="smooth" className={cn("h-full", "antialiased", geistSans.variable, jetbrainsMono.variable)} suppressHydrationWarning>
       <body className="min-h-full" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" disableTransitionOnChange>
-          <AuthProvider>
-            <TooltipProvider>
-              {children}
-            </TooltipProvider>
-            <Toaster position="top-center" richColors closeButton />
-          </AuthProvider>
+          <NextIntlClientProvider>
+            <AuthProvider>
+              <TooltipProvider>
+                {children}
+              </TooltipProvider>
+              <Toaster position="top-center" richColors closeButton />
+            </AuthProvider>
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

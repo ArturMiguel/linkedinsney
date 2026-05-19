@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { ArrowLeftIcon, ClockCounterClockwiseIcon, LinkedinLogoIcon } from "@phosphor-icons/react";
 import { Alert } from "@/lib/Alert";
+import { useTranslations } from "next-intl";
 
 type Translation = {
   id: string;
@@ -26,6 +27,7 @@ type ApiResponse = {
 };
 
 export default function HistoryPage() {
+  const t = useTranslations("history");
   const [translations, setTranslations] = useState<Translation[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(false);
@@ -75,10 +77,10 @@ export default function HistoryPage() {
               <div>
                 <h1 className="flex items-center gap-2 text-2xl font-bold tracking-tight text-foreground">
                   <ClockCounterClockwiseIcon className="h-6 w-6 text-primary" />
-                  Histórico de Traduções
+                  {t("title")}
                 </h1>
                 <p className="mt-0.5 text-sm text-muted-foreground">
-                  Suas traduções anteriores, da mais recente à mais antiga.
+                  {t("description")}
                 </p>
               </div>
             </div>
@@ -102,13 +104,13 @@ export default function HistoryPage() {
             ) : translations.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-24 text-center text-muted-foreground">
                 <ClockCounterClockwiseIcon className="mb-3 h-10 w-10 opacity-30" />
-                <p className="text-sm">Nenhuma tradução ainda.</p>
+                <p className="text-sm">{t("empty")}</p>
                 <p className="mt-1 text-xs">
-                  Volte para a{" "}
+                  {t("emptyHint")}{" "}
                   <Link href="/" className="text-primary underline-offset-2 hover:underline">
-                    página inicial
+                    {t("emptyLink")}
                   </Link>{" "}
-                  e faça sua primeira tradução.
+                  {t("emptyHintEnd")}
                 </p>
               </div>
             ) : (
@@ -127,14 +129,14 @@ export default function HistoryPage() {
                     <div className="grid gap-4 md:grid-cols-2">
                       <div>
                         <span className={`mb-2 inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${translation.mode === "encode" ? "bg-muted text-muted-foreground" : "bg-primary/10 text-primary"}`}>
-                          {translation.mode === "encode" ? "Humano" : "Linkedin"}
+                          {translation.mode === "encode" ? t("modeHuman") : t("modeLinkedIn")}
                         </span>
                         <p className="text-sm text-foreground">{translation.original_text}</p>
                       </div>
                       <div>
                         <div className="mb-2 flex items-center gap-x-4">
                           <span className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${translation.mode === "encode" ? "bg-primary/10 text-primary" : "bg-muted text-muted-foreground"}`}>
-                            {translation.mode === "encode" ? "Linkedisney" : "Humano"}
+                            {translation.mode === "encode" ? t("modeLinkedisney") : t("modeHuman")}
                           </span>
                           {translation.mode === "encode" && (
                             <button
@@ -143,7 +145,7 @@ export default function HistoryPage() {
                               className="inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-primary"
                             >
                               <LinkedinLogoIcon className="h-3.5 w-3.5" />
-                              Compartilhar
+                              {t("share")}
                             </button>
                           )}
                         </div>
@@ -164,7 +166,7 @@ export default function HistoryPage() {
                   onClick={() => fetchTranslations(page + 1, true)}
                   disabled={loadingMore}
                 >
-                  {loadingMore ? "Carregando..." : "Carregar mais"}
+                  {loadingMore ? t("loading") : t("loadMore")}
                 </Button>
               </div>
             )}

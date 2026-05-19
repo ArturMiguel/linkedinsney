@@ -5,21 +5,7 @@ import { useEffect, useState } from "react";
 import { Container } from "@/components/ui/container";
 import axios from "axios";
 import { Alert } from "@/lib/Alert";
-
-const examples = [
-  {
-    input: "Fui demitido hoje. Estou perdido e com medo do futuro.",
-    output: "Hoje encerro um ciclo e abro um novo capítulo cheio de possibilidades. Gratidão pela jornada! 🚀 #NovoComeço #Resiliencia",
-  },
-  {
-    input: "A reunião de 2h podia ter sido um e-mail.",
-    output: "Hoje participei de um alinhamento estratégico transformador. Comunicação é tudo! 💙 #Lideranca #Colaboracao",
-  },
-  {
-    input: "Trabalhei no fim de semana de novo. Estou exausto.",
-    output: "Dedicação não tem hora. Quem ama o que faz, transforma sábado em propósito. 🙏 #Mindset #Gratidao",
-  },
-];
+import { useTranslations } from "next-intl";
 
 function useCountUp(target: number, duration = 1500) {
   const [n, setN] = useState(0);
@@ -38,6 +24,8 @@ function useCountUp(target: number, duration = 1500) {
 }
 
 export const SocialProof = () => {
+  const t = useTranslations("socialProof");
+  const examples = t.raw("examples") as { input: string; output: string }[];
   const [target, setTarget] = useState(0);
 
   const count = useCountUp(target);
@@ -58,7 +46,7 @@ export const SocialProof = () => {
             {count.toLocaleString("pt-BR")}
           </div>
           <p className="mt-1 text-sm text-muted-foreground">
-            posts corporativos já traduzidos com propósito ✨
+            {t("counter")}
           </p>
         </div>
 
@@ -71,7 +59,7 @@ export const SocialProof = () => {
               <p className="text-sm italic text-muted-foreground">"{ex.input}"</p>
               <div className="my-3 flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-primary">
                 <ArrowRightIcon className="h-3.5 w-3.5" />
-                Versão Linkedisney
+                {t("exampleLabel")}
               </div>
               <p className="text-sm text-foreground">{ex.output}</p>
             </article>
