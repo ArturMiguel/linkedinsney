@@ -26,7 +26,7 @@ export default async function PrivacyPolicy() {
 
         <h1>POLÍTICA DE PRIVACIDADE</h1>
 
-        <p className="my-3">Última atualização em 30 de abril de 2026</p>
+        <p className="my-3">Última atualização em 21 de maio de 2026</p>
 
         <p className="my-3">
           Esta política descreve como o Linkedinsney coleta, armazena e utiliza suas informações pessoais.
@@ -68,7 +68,7 @@ export default async function PrivacyPolicy() {
         </p>
 
         <p className="my-3">
-          Processamos algum dado pessoal sensível? Algumas informações podem ser consideradas “especiais” ou “sensíveis”
+          Processamos algum dado pessoal sensível? Algumas informações podem ser consideradas "especiais" ou "sensíveis"
           em determinadas jurisdições, como origem racial ou étnica, orientação sexual e crenças religiosas.
           Nós não processamos informações pessoais sensíveis.
         </p>
@@ -151,52 +151,25 @@ export default async function PrivacyPolicy() {
         <h4 className="mb-3">Informações coletadas automaticamente</h4>
 
         <p className="my-3">
-          Resumo: Algumas informações - como seu endereço IP e/ou características do navegador e dispositivo -
-          são coletadas automaticamente quando você acessa os nossos Serviços.
+          Resumo: Algumas informações técnicas básicas são registradas automaticamente pela infraestrutura
+          de hospedagem quando você acessa os nossos Serviços.
         </p>
 
         <p className="my-3">
-          Coletamos automaticamente determinadas informações quando você visita, utiliza ou navega pelos Serviços.
-          Essas informações não revelam sua identidade específica (como seu nome ou informações de contato),
-          mas podem incluir dados de uso e do dispositivo, como endereço IP, tipo e características do navegador,
-          sistema operacional, preferências de idioma, URLs de referência, nome do dispositivo, país, localização,
-          informações sobre como e quando você utiliza os Serviços, e outros dados técnicos.
-          Esses dados são utilizados principalmente para garantir a segurança e o funcionamento dos Serviços,
-          bem como para análises internas e relatórios.
+          Nossa infraestrutura de hospedagem pode registrar automaticamente dados técnicos padrão de requisições HTTP,
+          como endereço IP, tipo de navegador (user-agent) e data/hora de acesso.
+          Esses registros são utilizados exclusivamente para garantir a segurança e o funcionamento dos Serviços.
+          Não utilizamos ferramentas de análise comportamental, rastreamento ou perfilamento de usuários.
         </p>
+
+        <h4 className="mb-3">Histórico de traduções</h4>
 
         <p className="my-3">
-          Assim como muitas empresas, também usamos cookies e tecnologias similares para coleta de informações.
+          Ao utilizar a funcionalidade de tradução, armazenamos o texto enviado por você (original),
+          o texto gerado (tradução), o modo utilizado (codificar ou decodificar), o idioma e a data da tradução.
+          Esses dados ficam vinculados à sua conta e podem ser acessados por você na seção de histórico.
+          Ao solicitar a exclusão da sua conta, todo o histórico de traduções será removido.
         </p>
-
-        <p className="my-3">As informações que coletamos incluem:</p>
-
-        <ul className="list-disc list-inside">
-          <li>
-            Dados de registro e uso. São informações relacionadas ao serviço, diagnóstico, uso e desempenho,
-            que nossos servidores coletam automaticamente quando você acessa ou utiliza os Serviços,
-            e que são registradas em arquivos de log. Dependendo da sua interação conosco, esses dados podem incluir
-            seu endereço IP, informações do dispositivo, tipo e configurações do navegador,
-            além de dados sobre sua atividade nos Serviços (como data e hora de acesso, páginas e arquivos visualizados,
-            buscas realizadas, funcionalidades utilizadas), informações sobre eventos do dispositivo
-            (como atividade do sistema, relatórios de erro - também chamados de "crash dumps" - e configurações de hardware).
-          </li>
-          <li>
-            Dados do dispositivo. Coletamos informações sobre o dispositivo que você utiliza para acessar os Serviços,
-            como computador, celular, tablet ou outro. Dependendo do dispositivo, esses dados podem incluir
-            seu endereço IP (ou proxy), identificadores do dispositivo e aplicativos, localização,
-            tipo de navegador, modelo do hardware, provedor de internet e/ou operadora móvel,
-            sistema operacional e configurações do sistema.
-          </li>
-          <li>
-            Dados de localização. Coletamos informações sobre a localização do seu dispositivo,
-            que podem ser precisas ou aproximadas. A quantidade de dados coletados depende do tipo e das
-            configurações do dispositivo que você utiliza. Por exemplo, podemos usar GPS e outras tecnologias
-            para coletar dados de geolocalização com base no seu endereço IP. Você pode optar por não permitir
-            essa coleta recusando o acesso ou desativando a função de Localização no seu dispositivo.
-            No entanto, isso pode limitar certas funcionalidades dos Serviços.
-          </li>
-        </ul>
 
         <h4 className="my-3">API do Google</h4>
 
@@ -307,12 +280,12 @@ export default async function PrivacyPolicy() {
 
         <h3 className="my-3">4. UTILIZAMOS COOKIES E OUTRAS TECNOLOGIAS DE RASTREAMENTO?</h3>
         <p className="my-3">
-          Resumo: Podemos utilizar cookies e outras tecnologias de rastreamento para coletar e armazenar suas informações.
+          Resumo: Podemos utilizar cookies para coletar e armazenar suas informações.
         </p>
 
         <p className="my-3">
-          Podemos usar cookies e tecnologias similares (como web beacons e pixels) para coletar informações quando você interage com nossos Serviços.
-          Algumas dessas tecnologias ajudam a manter a segurança dos Serviços e da sua conta, evitar falhas, corrigir bugs, salvar preferências e
+          Podemos usar cookies e tecnologias similares para coletar informações quando você interage com nossos Serviços.
+          Essas tecnologias ajudam a manter a segurança dos Serviços e da sua conta, evitar falhas, corrigir bugs, salvar preferências e
           auxiliar em funcionalidades básicas do site.
         </p>
 
@@ -399,33 +372,25 @@ export default async function PrivacyPolicy() {
           Caso tenha dúvidas ou comentários sobre seus direitos de privacidade, envie um e-mail para { supportMail }.
         </p>
 
-        <h3 className="my-3">9. CONTROLE DE FUNCIONALIDADES “NÃO RASTREAR”</h3>
-        <p className="my-3">
-          A maioria dos navegadores e alguns sistemas operacionais e aplicativos móveis possuem uma função “Não Rastrear” (DNT)
-          que pode ser ativada para sinalizar sua preferência por privacidade. Até o momento, não existe um padrão técnico uniforme para isso.
-          Portanto, não respondemos a sinais DNT ou outros mecanismos automáticos semelhantes.
-          Se houver um padrão oficial no futuro, atualizaremos esta Política para refletir tal mudança.
-        </p>
-
-        <h3 className="my-3">10. ESTA POLÍTICA PODE SER ATUALIZADA?</h3>
+        <h3 className="my-3">9. ESTA POLÍTICA PODE SER ATUALIZADA?</h3>
         <p className="my-3">
           Resumo: Sim, atualizaremos esta política conforme necessário para estar em conformidade com a legislação vigente.
         </p>
 
         <p className="my-3">
-          Podemos atualizar esta Política de Privacidade periodicamente. A nova versão será indicada pela data “Revisada” no topo do documento.
+          Podemos atualizar esta Política de Privacidade periodicamente. A nova versão será indicada pela data "Revisada" no topo do documento.
           Se houver alterações significativas, poderemos notificar você por meio de um aviso visível ou comunicação direta.
           Recomendamos que revise esta política regularmente para se manter informado sobre como protegemos seus dados.
         </p>
 
-        <h3 className="my-3" id="contact">11. COMO ENTRAR EM CONTATO CONOSCO SOBRE ESTE AVISO?</h3>
+        <h3 className="my-3" id="contact">10. COMO ENTRAR EM CONTATO CONOSCO SOBRE ESTE AVISO?</h3>
         <p className="my-3">
           Caso tenha dúvidas ou comentários sobre esta política, envie um e-mail para { supportMail } ou nos escreva para:
         </p>
 
         <p>Artur Miguel Rocha - { supportMail }</p>
 
-        <h3 className="my-3">12. COMO VOCÊ PODE REVISAR, ATUALIZAR OU EXCLUIR OS DADOS QUE COLETAMOS?</h3>
+        <h3 className="my-3">11. COMO VOCÊ PODE REVISAR, ATUALIZAR OU EXCLUIR OS DADOS QUE COLETAMOS?</h3>
         <p>
           De acordo com as leis aplicáveis do seu país, você pode ter o direito de solicitar acesso às informações pessoais
           que coletamos, detalhes sobre seu tratamento, correção de imprecisões ou exclusão dos seus dados.
