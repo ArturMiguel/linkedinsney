@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./styles.module.css";
 import { Logo } from "@/components/Logo";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Política de Privacidade",
 };
 
-export default function PrivacyPolicy() {
+export default async function PrivacyPolicy() {
   const supportMail = "linkedinsney@artcode.dev";
+  const locale = await getLocale();
+  const t = await getTranslations("agreements");
 
   return (
     <>
@@ -16,6 +19,10 @@ export default function PrivacyPolicy() {
         <div className="flex justify-center mb-4">
           <Logo />
         </div>
+
+        {locale !== "pt-BR" && (
+          <p className="my-3 text-sm text-muted-foreground italic">{t("languageNotice")}</p>
+        )}
 
         <h1>POLÍTICA DE PRIVACIDADE</h1>
 

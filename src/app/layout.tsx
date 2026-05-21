@@ -38,8 +38,10 @@ export const metadata: Metadata = {
     "satirizar LinkedIn",
     "propósito mindset jornada",
   ],
-  authors: [{ name: "Linkedinsney" }],
-  creator: "Linkedinsney",
+  authors: [{
+    name: "Artur Miguel (artur@artcode.dev)"
+  }],
+  creator: "Artur Miguel (artur@artcode.dev)",
   robots: {
     index: true,
     follow: true,

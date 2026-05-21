@@ -102,9 +102,8 @@
   "contact": {
     "title": "Contáctanos",
     "description": "¿Encontraste un bug, tienes una sugerencia o quieres cerrar tu cuenta? Escríbenos.",
-    "name": "Nombre",
-    "email": "Correo electrónico",
     "subject": "Asunto",
+    "loginRequired": "Inicia sesión con Google para enviar un mensaje ✨",
     "message": "Mensaje",
     "selectSubject": "Selecciona un asunto",
     "subjects": {
@@ -124,10 +123,12 @@
   },
   "api": {
     "notAuthenticated": "No autenticado.",
-    "invalidText": "Ingresa el texto a traducir (1-1000 caracteres).",
+    "invalidText": "Ingresa el texto a traducir (1-3000 caracteres).",
     "translationError": "Error al procesar la traducción. Inténtalo más tarde.",
     "fillAllFields": "Completa todos los campos.",
     "messageTooLong": "Mensaje demasiado largo.",
+    "rateLimitMail": "Espera un minuto antes de enviar otro mensaje.",
+    "mailSendError": "Error al enviar el mensaje. Inténtalo de nuevo más tarde.",
     "invalidGoogleToken": "Token de Google inválido.",
     "tokenMismatch": "El token no pertenece a esta aplicación.",
     "googleCredentialMissing": "Credencial de Google no proporcionada.",
@@ -136,5 +137,8 @@
   "common": {
     "themeToggle": "Cambiar tema",
     "languageToggle": "Idioma"
+  },
+  "agreements": {
+    "languageNotice": "Este documento está disponible solo en portugués brasileño."
   }
 }

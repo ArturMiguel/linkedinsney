@@ -15,6 +15,9 @@ pnpm-debug.log*
 .vscode
 .idea
 
+# Env
+.env*
+
 # Docker
 Dockerfile
 docker-compose.yml

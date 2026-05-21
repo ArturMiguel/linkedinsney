@@ -6,11 +6,10 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CheckCircleIcon, EnvelopeSimpleIcon, LinkedinLogoIcon } from "@phosphor-icons/react";
+import { CheckCircleIcon, EnvelopeSimpleIcon, LockSimpleIcon } from "@phosphor-icons/react";
 import { Alert } from "@/lib/Alert";
 import axios from "axios";
 import * as cowsay from "cowsay";
@@ -26,14 +25,13 @@ const SUBJECT_KEYS = [
 ] as const;
 
 type ContactForm = {
-  name: string;
-  email: string;
   subject: string;
   message: string;
 };
 
 export default function ContactPage() {
   const t = useTranslations("contact");
+  const { user, setLoading } = useAuth();
 
   useEffect(() => {
     console.info(cowsay.say({ text: `Olá, dev!\nCaso encontre algo estranho neste site\n(além deste aviso), conte pra gente em\n${process.env.NEXT_PUBLIC_SITE}/contact` }), "\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
@@ -41,15 +39,14 @@ export default function ContactPage() {
 
   const [submitted, setSubmitted] = useState(false);
   const { register, handleSubmit, watch, reset, control, formState: { isSubmitting } } = useForm<ContactForm>();
-  const { setLoading } = useAuth();
 
   function onSubmit(data: ContactForm) {
     setLoading(true);
     axios.post("/api/v1/mails", data).then(() => {
       setSubmitted(true);
       reset();
-    }).catch(() => {
-      Alert.error("", t("errorMessage"), 5000);
+    }).catch((error) => {
+      Alert.error("", error.response?.data?.message ?? t("errorMessage"), 5000);
     }).finally(() => {
       setLoading(false);
     });
@@ -86,22 +83,12 @@ export default function ContactPage() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-                    <div className="grid grid-cols-1 gap-y-3 gap-x-4 sm:grid-cols-2">
-                      <Field>
-                        <FieldLabel>{t("name")} <span className="text-destructive">*</span></FieldLabel>
-                        <Input {...register("name", { required: true })} type="text" />
-                      </Field>
-                      <Field>
-                        <FieldLabel>{t("email")} <span className="text-destructive">*</span></FieldLabel>
-                        <Input {...register("email", { required: true })} type="email" />
-                      </Field>
-                    </div>
-
                     <Field>
                       <FieldLabel>{t("subject")} <span className="text-destructive">*</span></FieldLabel>
                       <Controller
                         name="subject"
                         control={control}
+                        defaultValue=""
                         rules={{ required: true }}
                         render={({ field }) => (
                           <Select value={field.value} onValueChange={field.onChange}>
@@ -123,16 +110,27 @@ export default function ContactPage() {
                       <Textarea
                         {...register("message", { required: true })}
                         rows={5}
-                        maxLength={1000}
+                        maxLength={3000}
                         placeholder={t("messagePlaceholder")}
                       />
-                      <small>{watch("message")?.length ?? 0}/1000</small>
+                      <small>{watch("message")?.length ?? 0}/3000</small>
                     </Field>
 
-                    <div className="flex justify-end">
-                      <Button type="submit" disabled={isSubmitting} className="w-full">
+                    <div>
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting || !user}
+                        className="w-full"
+                      >
                         {isSubmitting ? t("submitting") : t("submit")}
+                        {!user && <LockSimpleIcon className="ml-2 h-5 w-5" />}
                       </Button>
+
+                      {!user && (
+                        <p className="mt-3 text-center text-sm text-bold-foreground">
+                          {t("loginRequired")}
+                        </p>
+                      )}
                     </div>
                   </form>
                 )}

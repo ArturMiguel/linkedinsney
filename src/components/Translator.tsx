@@ -13,7 +13,7 @@ import { useAuth } from "@/providers/AuthProvider";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useTranslations } from "next-intl";
 
-const MAX = 1000;
+const MAX = 3000;
 
 type TranslatorForm = { text: string };
 

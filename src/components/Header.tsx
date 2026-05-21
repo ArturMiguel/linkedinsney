@@ -75,37 +75,35 @@ export const Header = () => {
             <div className="flex items-center gap-x-4">
               <ThemeToggle />
               <LocaleSwitcher />
-              {!loading && (
-                user ? (
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <img
-                        src={user.picture}
-                        alt={user.name}
-                        className="h-8 w-8 cursor-pointer rounded-full ring-2 ring-transparent transition-all hover:ring-border"
-                      />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-52">
-                      <DropdownMenuLabel className="font-normal">
-                        <p className="truncate text-sm font-medium">{user.name}</p>
-                        <p className="truncate text-xs text-muted-foreground">{user.email}</p>
-                      </DropdownMenuLabel>
-                      <DropdownMenuItem asChild className="cursor-pointer">
-                        <Link href="/history">
-                          <ClockCounterClockwiseIcon className="mr-2 h-4 w-4" />
-                          {t("history")}
-                        </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={signOut} className="cursor-pointer">
-                        <SignOutIcon className="mr-2 h-4 w-4" />
-                        {t("signOut")}
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                ) : (
-                  <div ref={googleBtnRef} />
-                )
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <img
+                      src={user.picture}
+                      alt={user.name}
+                      className="h-8 w-8 cursor-pointer rounded-full ring-2 ring-transparent transition-all hover:ring-border"
+                    />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-52">
+                    <DropdownMenuLabel className="font-normal">
+                      <p className="truncate text-sm font-medium">{user.name}</p>
+                      <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+                    </DropdownMenuLabel>
+                    <DropdownMenuItem asChild className="cursor-pointer">
+                      <Link href="/history">
+                        <ClockCounterClockwiseIcon className="mr-2 h-4 w-4" />
+                        {t("history")}
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={signOut} className="cursor-pointer">
+                      <SignOutIcon className="mr-2 h-4 w-4" />
+                      {t("signOut")}
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : !loading && (
+                <div ref={googleBtnRef} />
               )}
             </div>
           </div>

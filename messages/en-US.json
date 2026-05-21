@@ -25,7 +25,7 @@
     "hintEncode": "Be honest. We'll polish it.",
     "submittingDecode": "Removing purpose...",
     "submittingEncode": "Adding purpose...",
-    "buttonDecode": "Translate without BS",
+    "buttonDecode": "Translate without Bullshit",
     "buttonEncode": "Translate to Linkedisney",
     "loginRequired": "Sign in with Google to unlock translation ✨",
     "outputLabelDecode": "What the person really meant",
@@ -102,9 +102,8 @@
   "contact": {
     "title": "Contact Us",
     "description": "Found a bug, have a suggestion, or want to close your account? Get in touch.",
-    "name": "Name",
-    "email": "Email",
     "subject": "Subject",
+    "loginRequired": "Sign in with Google to send a message ✨",
     "message": "Message",
     "selectSubject": "Select a subject",
     "subjects": {
@@ -124,10 +123,12 @@
   },
   "api": {
     "notAuthenticated": "Not authenticated.",
-    "invalidText": "Enter the text to be translated (1-1000 characters).",
+    "invalidText": "Enter the text to be translated (1-3000 characters).",
     "translationError": "Error processing translation. Try again later.",
     "fillAllFields": "Fill in all fields.",
     "messageTooLong": "Message too long.",
+    "rateLimitMail": "Please wait one minute before sending another message.",
+    "mailSendError": "Failed to send your message. Please try again later.",
     "invalidGoogleToken": "Invalid Google token.",
     "tokenMismatch": "Token does not belong to this application.",
     "googleCredentialMissing": "Google credential not provided.",
@@ -136,5 +137,8 @@
   "common": {
     "themeToggle": "Toggle theme",
     "languageToggle": "Language"
+  },
+  "agreements": {
+    "languageNotice": "This document is available in Brazilian Portuguese only."
   }
 }

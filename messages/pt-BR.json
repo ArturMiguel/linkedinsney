@@ -102,9 +102,8 @@
   "contact": {
     "title": "Entre em Contato",
     "description": "Encontrou um bug, tem uma sugestão ou quer encerrar sua conta? Fale com a gente.",
-    "name": "Nome",
-    "email": "E-mail",
     "subject": "Assunto",
+    "loginRequired": "Entre com sua conta Google para enviar uma mensagem ✨",
     "message": "Mensagem",
     "selectSubject": "Selecione um assunto",
     "subjects": {
@@ -124,10 +123,12 @@
   },
   "api": {
     "notAuthenticated": "Não autenticado.",
-    "invalidText": "Informe o texto a ser traduzido (1-1000 caracteres).",
+    "invalidText": "Informe o texto a ser traduzido (1-3000 caracteres).",
     "translationError": "Erro ao processar a tradução. Tente novamente mais tarde.",
     "fillAllFields": "Preencha todos os campos.",
     "messageTooLong": "Mensagem muito longa.",
+    "rateLimitMail": "Aguarde um minuto antes de enviar outra mensagem.",
+    "mailSendError": "Erro ao enviar a mensagem. Tente novamente mais tarde.",
     "invalidGoogleToken": "Token do Google inválido.",
     "tokenMismatch": "Token não pertence a este aplicativo.",
     "googleCredentialMissing": "Credencial Google não informada.",

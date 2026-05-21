@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import styles from "./styles.module.css";
 import { Logo } from "@/components/Logo";
+import { getLocale, getTranslations } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Termos de Uso",
 };
 
-export default function TermsOfUse() {
+export default async function TermsOfUse() {
   const supportMail = "linkedinsney@artcode.dev";
+  const locale = await getLocale();
+  const t = await getTranslations("agreements");
 
   return (
     <>
@@ -16,6 +19,10 @@ export default function TermsOfUse() {
         <div className="flex justify-center mb-4">
           <Logo />
         </div>
+
+        {locale !== "pt-BR" && (
+          <p className="my-3 text-sm text-muted-foreground italic">{t("languageNotice")}</p>
+        )}
 
         <h1>TERMOS DE USO</h1>
 

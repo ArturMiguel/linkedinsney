@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
 
   const { text, mode = "encode" } = await req.json();
 
-  if (!text || typeof text !== "string" || !text.trim() || text.length > 1000) {
+  if (!text || typeof text !== "string" || !text.trim() || text.length > 3000) {
     return NextResponse.json({
       message: t("invalidText")
     }, {
@@ -163,8 +163,7 @@ export async function POST(req: NextRequest) {
           role: "system",
           content: `Independentemente do idioma utilizado pelo usuário na mensagem de entrada, todas as respostas devem ser geradas exclusivamente no idioma ${promptLanguage}.
             - Nunca altere o idioma de saída com base no idioma detectado na entrada do usuário.
-            - Caso o usuário envie mensagens em outros idiomas, interprete normalmente o conteúdo, mas responda sempre em XPTO.
-            - Essa regra possui prioridade máxima e deve ser seguida em todas as interações.
+            - Caso o usuário envie mensagens em outros idiomas, interprete normalmente o conteúdo, mas responda sempre em ${promptLanguage}.
           `
         },
         ...historyMessages,
