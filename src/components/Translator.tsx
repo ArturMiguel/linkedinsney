@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/utils";
-import { SparkleIcon, RocketIcon, CheckIcon, CopyIcon, LinkedinLogoIcon, LockSimpleIcon, ArrowsLeftRightIcon, ArrowClockwiseIcon } from "@phosphor-icons/react";
+import { SparkleIcon, RocketIcon, CheckIcon, CopyIcon, LinkedinLogoIcon, LockSimpleIcon, ArrowsLeftRightIcon, ArrowClockwiseIcon, InfoIcon } from "@phosphor-icons/react";
 import { toast } from "sonner";
 import axios from "axios";
 import { useAuth } from "@/providers/AuthProvider";
@@ -24,6 +24,7 @@ export const Translator = () => {
 
   const [mode, setMode] = useState<"encode" | "decode">("encode");
   const [output, setOutput] = useState("");
+  const [score, setScore] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
@@ -32,13 +33,15 @@ export const Translator = () => {
   const onSubmit = async ({ text }: TranslatorForm) => {
     setError(null);
     setOutput("");
+    setScore(null);
 
     try {
-      const { data } = await axios.post<{ text: string }>("/api/v1/translates", {
+      const { data } = await axios.post<{ text: string; score?: number }>("/api/v1/translates", {
         text: text,
         mode: mode
       });
       setOutput(data.text);
+      if (data.score !== undefined) setScore(data.score);
     } catch {
       setError(t("error"));
     }
@@ -70,7 +73,7 @@ export const Translator = () => {
                 <TooltipTrigger asChild>
                   <button
                     type="button"
-                    onClick={() => { setMode(mode === "encode" ? "decode" : "encode"); setOutput(""); setError(null); }}
+                    onClick={() => { setMode(mode === "encode" ? "decode" : "encode"); setOutput(""); setScore(null); setError(null); }}
                     className="inline-flex items-center justify-center rounded-full border border-border bg-background p-1.5 text-muted-foreground transition-colors hover:text-foreground"
                     disabled={isSubmitting}
                   >
@@ -165,6 +168,25 @@ export const Translator = () => {
                   </div>
                 )}
               </div>
+
+              {mode === "decode" && (
+                <div className="mt-3 flex items-center justify-between rounded-lg border border-border bg-background px-3 py-2">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span className="inline-flex cursor-help items-center gap-1 text-xs text-muted-foreground">
+                        {t("scoreText")}
+                        <InfoIcon className="h-3.5 w-3.5" />
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{t("scoreTooltip")}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                  <span className="text-sm font-semibold text-primary">
+                    {score !== null ? `${score}%` : "---"}
+                  </span>
+                </div>
+              )}
 
               {mode === "encode" && (
                 <Button

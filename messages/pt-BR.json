@@ -37,6 +37,8 @@
     "emptyDecode": "A confissão honesta aparece aqui",
     "emptyEncode": "Sua versão corporativa aparece aqui ✨",
     "shareLinkedIn": "Compartilhar no LinkedIn",
+    "scoreText": "Score Linkedisney do texto original",
+    "scoreTooltip": "De 0 a 100: o quão Linkedisney é o texto original",
     "error": "Ops, o propósito saiu de férias. Tente novamente."
   },
   "howItWorks": {

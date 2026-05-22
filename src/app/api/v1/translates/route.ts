@@ -38,6 +38,20 @@ const SYSTEM_PROMPT = `
   - Ao final do texto, quebre linha com \n e adicione exatamente 3 hashtags relevantes ao contexto da mensagem, no formato #PalavraChave #PalavraChave2 PalavraChave3
 `;
 
+const SCORE_PROMPT = `
+  Você é um avaliador que analisa textos e determina o quão "Linkedisney" (típico de posts do LinkedIn) eles são.
+  Responda APENAS com um número inteiro de 0 a 100, sem texto adicional.
+  Critérios para pontuar (quanto mais presentes e intensos, maior o score):
+  - Buzzwords corporativas em qualquer idioma
+  - Emojis motivacionais e hashtags inspiracionais
+  - Tom de guru corporativo, humilde-grato ou "thought leader"
+  - Exagero na positividade e ausência de problemas reais
+  - Estrutura de "lição de vida", storytelling motivacional ou "hot take"
+  - Formatação otimizada para engajamento: frases curtas isoladas, excesso de quebras de linha, bullet points dramáticos
+  - Previsões grandiosas ou posicionamento como visionário/especialista
+  - Texto que claramente foi escrito para performar no LinkedIn, mesmo sem buzzwords óbvias
+`;
+
 function detectPromptLeak(output: string): boolean {
   const normalized = output.toLowerCase();
   const prompts = `${REVERSE_SYSTEM_PROMPT}\n${SYSTEM_PROMPT}`;
@@ -153,9 +167,14 @@ export async function POST(req: NextRequest) {
   const promptLanguage = cookieStore.get("linkedinsney_locale")?.value;
 
   let translated: string;
+  let score: number | null = null;
+
+  const ollamaHeaders = {
+    Authorization: `Bearer ${ollamaToken}`
+  };
 
   try {
-    const { data } = await axios.post(`${ollamaAPI}/api/chat`, {
+    const translateRequest = axios.post(`${ollamaAPI}/api/chat`, {
       model: ollamaModel,
       think: false,
       stream: false,
@@ -183,15 +202,42 @@ export async function POST(req: NextRequest) {
         }
       ]
     }, {
-      headers: {
-        Authorization: `Bearer ${ollamaToken}`
-      },
+      headers: ollamaHeaders
     });
 
-    translated = (data?.message?.content ?? "")
+    const scoreRequest = mode === "decode" ? axios.post(`${ollamaAPI}/api/chat`, {
+      model: ollamaModel,
+      think: false,
+      stream: false,
+      options: {
+        temperature: 0,
+        seed: 42,
+      },
+      messages: [
+        {
+          role: "system",
+          content: SCORE_PROMPT
+        },
+        {
+          role: "user",
+          content: text
+        }
+      ]
+    }, {
+      headers: ollamaHeaders
+    }) : null;
+
+    const [translateResponse, scoreResponse] = await Promise.all([translateRequest, scoreRequest]);
+
+    translated = (translateResponse.data?.message?.content ?? "")
       .replace(/\*/g, "")
       .replace(/<br>/g, "\n\n")
       .replace(/\n\n\n/g, "\n");
+
+    if (scoreResponse) {
+      const scoreValue = parseInt(scoreResponse.data?.message?.content?.trim() ?? "");
+      score = scoreValue >= 0 && scoreValue <= 100 ? scoreValue : null;
+    }
   } catch (error: any) {
     return NextResponse.json({
       message: t("translationError")
@@ -220,7 +266,8 @@ export async function POST(req: NextRequest) {
   });
 
   return NextResponse.json({
-    text: translated
+    text: translated,
+    ...(score !== null && { score })
   }, {
     status: 200
   });
