@@ -31,12 +31,22 @@ const SYSTEM_PROMPT = `
   - O sarcasmo deve ser implícito: nunca dito, apenas percebido por quem conhece o ambiente corporativo
   - Nunca reconheça problemas como problemas — tudo é \"desafio\", \"aprendizado\" ou \"oportunidade de melhoria\"
   - Nunca use formatações de texto como negrito, itálico, sublinhado ou qualquer símbolo markdown, incluindo **, __, ## — emojis não são formatação e devem ser usados normalmente
-  - Use obrigatoriamente pelo menos 1 emoji por parágrafo, posicionado onde reforce o sentido da frase. Cada emoji tem significado específico e só deve ser usado no contexto correto: 🚀 conquista concreta, avanço real, lançamento; 💡 insight genuíno, ideia nova, descoberta; 🙏 gratidão ou reconhecimento a alguém ou algo específico; ✨ transformação significativa, momento especial; 💙 vínculo emocional, pertencimento, comunidade
+  - Use obrigatoriamente pelo menos 1 emoji por parágrafo, posicionado onde reforce o sentido da frase. Cada emoji tem significado específico e só deve ser usado no contexto correto: 🚀 conquista concreta, avanço real, lançamento; 💡 insight genuíno, ideia nova, descoberta; 🙏 gratidão ou reconhecimento a alguém ou algo específico; ✨ transformação significativa, momento especial; 💙 vínculo emocional, pertencimento, comunidade; 🎯 meta batida, foco, resultado direto; 🔥 paixão, intensidade, estar "on fire"; 💪 resiliência, superação, esforço recompensado
   - Use \n para quebras de linha entre parágrafos
   - Responda APENAS com o texto traduzido, sem explicações ou comentários adicionais
   - O texto deve conter até 2 parágrafos, sendo o primeiro focado na transformação do problema e o segundo detalhando o aprendizado ou oportunidade.
   - Ao final do texto, quebre linha com \n e adicione exatamente 3 hashtags relevantes ao contexto da mensagem, no formato #PalavraChave #PalavraChave2 PalavraChave3
 `;
+
+function detectPromptLeak(output: string): boolean {
+  const normalized = output.toLowerCase();
+  const prompts = `${REVERSE_SYSTEM_PROMPT}\n${SYSTEM_PROMPT}`;
+  return prompts
+    .split("\n")
+    .map((line) => line.trim().replace(/^- /, "").toLowerCase())
+    .filter((line) => line.length >= 30)
+    .some((line) => normalized.includes(line.slice(0, 50)));
+}
 
 export async function GET(req: NextRequest) {
   const cookieStore = await cookies();
@@ -111,6 +121,7 @@ export async function POST(req: NextRequest) {
     });
   }
 
+  const systemPrompt = mode == "decode" ? REVERSE_SYSTEM_PROMPT : SYSTEM_PROMPT;
   const ollamaAPI = process.env.OLLAMA_API_URL as string;
   const ollamaModel = process.env.OLLAMA_API_MODEL as string;
   const ollamaToken = process.env.OLLAMA_API_TOKEN as string;
@@ -139,7 +150,6 @@ export async function POST(req: NextRequest) {
     }
   ]));
 
-  const systemPrompt = mode == "decode" ? REVERSE_SYSTEM_PROMPT : SYSTEM_PROMPT;
   const promptLanguage = cookieStore.get("linkedinsney_locale")?.value;
 
   let translated: string;
@@ -187,6 +197,14 @@ export async function POST(req: NextRequest) {
       message: t("translationError")
     }, {
       status: 500
+    });
+  }
+
+  if (detectPromptLeak(translated)) {
+    return NextResponse.json({
+      message: t("translationError")
+    }, {
+      status: 418
     });
   }
 
