@@ -104,8 +104,14 @@ export async function GET(req: NextRequest) {
     }),
   ]);
 
+  const decryptedData = data.map((item) => ({
+    ...item,
+    original_text: AuthService.decrypt(item.original_text),
+    translated_text: AuthService.decrypt(item.translated_text),
+  }));
+
   return NextResponse.json({
-    data,
+    data: decryptedData,
     total,
     page,
     hasMore: skip + data.length < total,
@@ -157,11 +163,11 @@ export async function POST(req: NextRequest) {
   }).then((history) => history.reverse().flatMap((translation) => [
     {
       role: "user",
-      content: translation.original_text
+      content: AuthService.decrypt(translation.original_text)
     },
     {
       role: "assistant",
-      content: translation.translated_text
+      content: AuthService.decrypt(translation.translated_text)
     }
   ]));
 
@@ -266,8 +272,8 @@ export async function POST(req: NextRequest) {
   await prisma.translation.create({
     data: {
       author_id: user.id,
-      original_text: text,
-      translated_text: translated,
+      original_text: AuthService.encrypt(text),
+      translated_text: AuthService.encrypt(translated),
       model: ollamaModel,
       mode: mode,
       lang: promptLanguage
