@@ -37,8 +37,16 @@
     "emptyDecode": "The honest confession appears here",
     "emptyEncode": "Your corporate version appears here ✨",
     "shareLinkedIn": "Share on LinkedIn",
-    "scoreText": "Linkedisney Score of the original text",
-    "scoreTooltip": "From 0 to 100: how Linkedisney the original text is",
+    "scoreText": "Linkedometer",
+    "scoreTooltip": "Classification of the original text",
+    "scoreLabels": {
+      "real": "Real human being",
+      "contaminated": "Slight corporate contamination",
+      "intern": "LinkedIn intern",
+      "coach": "Coach in training",
+      "guru": "Corporate guru",
+      "ambassador": "Ambassador of purpose"
+    },
     "error": "Oops, purpose went on vacation. Try again."
   },
   "howItWorks": {

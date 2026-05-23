@@ -115,6 +115,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const cookieStore = await cookies();
   const t = await getTranslations("api");
+  const tTranslator = await getTranslations("translator");
   const user = await AuthService.authenticate(cookieStore);
 
   if (!user) {
@@ -167,7 +168,7 @@ export async function POST(req: NextRequest) {
   const promptLanguage = cookieStore.get("linkedinsney_locale")?.value;
 
   let translated: string;
-  let score: number | null = null;
+  let scoreLabel: string | null = null;
 
   const ollamaHeaders = {
     Authorization: `Bearer ${ollamaToken}`
@@ -236,7 +237,15 @@ export async function POST(req: NextRequest) {
 
     if (scoreResponse) {
       const scoreValue = parseInt(scoreResponse.data?.message?.content?.trim() ?? "");
-      score = scoreValue >= 0 && scoreValue <= 100 ? scoreValue : null;
+      if (scoreValue >= 0 && scoreValue <= 100) {
+        const key = scoreValue <= 15 ? "real"
+          : scoreValue <= 35 ? "contaminated"
+          : scoreValue <= 55 ? "intern"
+          : scoreValue <= 70 ? "coach"
+          : scoreValue <= 85 ? "guru"
+          : "ambassador";
+        scoreLabel = tTranslator(`scoreLabels.${key}`);
+      }
     }
   } catch (error: any) {
     return NextResponse.json({
@@ -267,7 +276,7 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({
     text: translated,
-    ...(score !== null && { score })
+    ...(scoreLabel !== null && { scoreLabel })
   }, {
     status: 200
   });

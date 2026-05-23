@@ -37,8 +37,16 @@
     "emptyDecode": "La confesión honesta aparece aquí",
     "emptyEncode": "Tu versión corporativa aparece aquí ✨",
     "shareLinkedIn": "Compartir en LinkedIn",
-    "scoreText": "Score Linkedisney del texto original",
-    "scoreTooltip": "De 0 a 100: qué tan Linkedisney es el texto original",
+    "scoreText": "Linkedómetro",
+    "scoreTooltip": "Clasificación del texto original",
+    "scoreLabels": {
+      "real": "Ser humano real",
+      "contaminated": "Leve contaminación corporativa",
+      "intern": "Pasante de LinkedIn",
+      "coach": "Coach en formación",
+      "guru": "Gurú corporativo",
+      "ambassador": "Embajador(a) del propósito"
+    },
     "error": "Ups, el propósito se fue de vacaciones. Inténtalo de nuevo."
   },
   "howItWorks": {

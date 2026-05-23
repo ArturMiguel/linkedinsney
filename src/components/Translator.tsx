@@ -24,7 +24,7 @@ export const Translator = () => {
 
   const [mode, setMode] = useState<"encode" | "decode">("encode");
   const [output, setOutput] = useState("");
-  const [score, setScore] = useState<number | null>(null);
+  const [scoreLabel, setScoreLabel] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
 
@@ -33,15 +33,15 @@ export const Translator = () => {
   const onSubmit = async ({ text }: TranslatorForm) => {
     setError(null);
     setOutput("");
-    setScore(null);
+    setScoreLabel(null);
 
     try {
-      const { data } = await axios.post<{ text: string; score?: number }>("/api/v1/translates", {
+      const { data } = await axios.post<{ text: string; scoreLabel?: string }>("/api/v1/translates", {
         text: text,
         mode: mode
       });
       setOutput(data.text);
-      if (data.score !== undefined) setScore(data.score);
+      if (data.scoreLabel !== undefined) setScoreLabel(data.scoreLabel);
     } catch {
       setError(t("error"));
     }
@@ -73,7 +73,7 @@ export const Translator = () => {
                 <TooltipTrigger asChild>
                   <button
                     type="button"
-                    onClick={() => { setMode(mode === "encode" ? "decode" : "encode"); setOutput(""); setScore(null); setError(null); }}
+                    onClick={() => { setMode(mode === "encode" ? "decode" : "encode"); setOutput(""); setScoreLabel(null); setError(null); }}
                     className="inline-flex items-center justify-center rounded-full border border-border bg-background p-1.5 text-muted-foreground transition-colors hover:text-foreground"
                     disabled={isSubmitting}
                   >
@@ -182,8 +182,8 @@ export const Translator = () => {
                       <p>{t("scoreTooltip")}</p>
                     </TooltipContent>
                   </Tooltip>
-                  <span className="text-sm font-semibold text-primary">
-                    {score !== null ? `${score}%` : "---"}
+                  <span className="text-xs font-semibold text-primary">
+                    {scoreLabel ?? "---"}
                   </span>
                 </div>
               )}
