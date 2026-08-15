@@ -21,7 +21,9 @@ export class AuthService {
     return new TextEncoder().encode(process.env.JWT_SECRET);
   }
 
-  private static readonly encryptionKey = CryptoJS.enc.Hex.parse(process.env.ENCRYPTION_KEY as string);
+  private static get encryptionKey() {
+    return CryptoJS.enc.Hex.parse(process.env.ENCRYPTION_KEY as string);
+  }
   private static readonly encryptionIv = CryptoJS.lib.WordArray.create(new Uint8Array(16));
 
   static encrypt(text: string): string {
