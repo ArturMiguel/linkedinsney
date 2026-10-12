@@ -42,5 +42,5 @@ next-env.d.ts
 
 .claude
 src/generated
-prisma/migrate-encrypt.ts
-prisma/query-decrypt.ts
+scripts
+.vscode

@@ -16,7 +16,9 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://linkedinsney.com";
+const siteUrl = process.env.NEXT_PUBLIC_SITE as string;
+const authorName = process.env.AUTHOR_NAME;
+const authorEmail = process.env.AUTHOR_EMAIL;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -39,9 +41,9 @@ export const metadata: Metadata = {
     "propósito mindset jornada",
   ],
   authors: [{
-    name: "Artur Miguel (artur@artcode.dev)"
+    name: `${authorName} (${authorEmail})`
   }],
-  creator: "Artur Miguel (artur@artcode.dev)",
+  creator: `${authorName} (${authorEmail})`,
   robots: {
     index: true,
     follow: true,

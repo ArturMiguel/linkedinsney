@@ -46,7 +46,7 @@ export default function ContactPage() {
       setSubmitted(true);
       reset();
     }).catch((error) => {
-      Alert.error("", error.response?.data?.message ?? t("errorMessage"), 5000);
+      Alert.error("", error.response?.data?.message ?? t("errorMessage", { email: process.env.NEXT_PUBLIC_SUPPORT_EMAIL as string }), 5000);
     }).finally(() => {
       setLoading(false);
     });
@@ -66,7 +66,7 @@ export default function ContactPage() {
                 </p>
                 <div className="mt-4 flex flex-col xl:flex-row gap-2">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <EnvelopeSimpleIcon className="h-4 w-4 shrink-0 text-primary" /> linkedinsney@artcode.dev
+                    <EnvelopeSimpleIcon className="h-4 w-4 shrink-0 text-primary" /> {process.env.NEXT_PUBLIC_SUPPORT_EMAIL}
                   </div>
                 </div>
               </div>

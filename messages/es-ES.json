@@ -129,7 +129,7 @@
     "successTitle": "¡Mensaje recibido!",
     "successDescription": "Te responderemos lo antes posible.",
     "sendAnother": "Enviar otro mensaje",
-    "errorMessage": "No fue posible enviar tu mensaje. Inténtalo de nuevo o escribe directamente a linkedinsney@artcode.dev."
+    "errorMessage": "No fue posible enviar tu mensaje. Inténtalo de nuevo o escribe directamente a {email}."
   },
   "api": {
     "notAuthenticated": "No autenticado.",

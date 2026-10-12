@@ -24,18 +24,21 @@ export class AuthService {
   private static get encryptionKey() {
     return CryptoJS.enc.Hex.parse(process.env.ENCRYPTION_KEY as string);
   }
-  private static readonly encryptionIv = CryptoJS.lib.WordArray.create(new Uint8Array(16));
+
+  private static readonly legacyIv = CryptoJS.lib.WordArray.create(new Uint8Array(16));
 
   static encrypt(text: string): string {
-    return CryptoJS.AES.encrypt(text, this.encryptionKey, {
-      iv: this.encryptionIv
-    }).toString();
+    const iv = CryptoJS.lib.WordArray.random(16);
+    const ciphertext = CryptoJS.AES.encrypt(text, this.encryptionKey, { iv }).toString();
+    return `${iv.toString(CryptoJS.enc.Hex)}:${ciphertext}`;
   }
 
-  static decrypt(ciphertext: string): string {
-    const bytes = CryptoJS.AES.decrypt(ciphertext, this.encryptionKey, {
-      iv: this.encryptionIv
-    });
+  static decrypt(payload: string): string {
+    const hasIvPrefix = payload.charAt(32) === ":";
+    const iv = hasIvPrefix ? CryptoJS.enc.Hex.parse(payload.slice(0, 32)) : this.legacyIv;
+    const ciphertext = hasIvPrefix ? payload.slice(33) : payload;
+
+    const bytes = CryptoJS.AES.decrypt(ciphertext, this.encryptionKey, { iv });
     return bytes.toString(CryptoJS.enc.Utf8);
   }
 

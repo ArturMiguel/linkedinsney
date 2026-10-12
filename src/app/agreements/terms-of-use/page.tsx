@@ -9,7 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default async function TermsOfUse() {
-  const supportMail = "linkedinsney@artcode.dev";
+  const supportMail = process.env.NEXT_PUBLIC_SUPPORT_EMAIL;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE;
+  const authorName = process.env.AUTHOR_NAME;
   const locale = await getLocale();
   const t = await getTranslations("agreements");
 
@@ -33,7 +35,7 @@ export default async function TermsOfUse() {
         <p className="my-3">
           O Linkedinsney é uma ferramenta de tradução de textos para posts corporativos no LinkedIn, alimentada por inteligência artificial.
           Cole qualquer texto honesto e receba um post impecável com buzzwords, propósito e emojis, pronto para publicação.
-          O serviço é disponibilizado em <Link className="ml-1 underline underline-offset-2" href="/">https://linkedinsney.com.br</Link> e mantido por Artur Miguel Rocha.
+          O serviço é disponibilizado em <Link className="ml-1 underline underline-offset-2" href="/">{siteUrl}</Link> e mantido por {authorName}.
         </p>
 
         <p className="my-3">Dúvidas ou solicitações podem ser enviadas para {supportMail}.</p>
@@ -132,7 +134,7 @@ export default async function TermsOfUse() {
 
         <h3 className="my-3">9. POLÍTICA DE PRIVACIDADE</h3>
         <p className="my-3">
-          Nos importamos com sua privacidade. Leia nossa Política de Privacidade: <Link className="ml-1 underline underline-offset-2" href="/agreements/privacy-policy">https://linkedinsney.com.br/agreements/privacy-policy</Link>. Ao usar os Serviços, você concorda com essa política, que está incorporada a estes Termos.
+          Nos importamos com sua privacidade. Leia nossa Política de Privacidade: <Link className="ml-1 underline underline-offset-2" href="/agreements/privacy-policy">{siteUrl}/agreements/privacy-policy</Link>. Ao usar os Serviços, você concorda com essa política, que está incorporada a estes Termos.
         </p>
 
         <h3 className="my-3">10. VIGÊNCIA E RESCISÃO</h3>
@@ -182,7 +184,7 @@ export default async function TermsOfUse() {
         <p className="my-3">
           Para esclarecer dúvidas ou registrar reclamações sobre os Serviços, entre em contato:
         </p>
-        <p>Artur Miguel Rocha - {supportMail}</p>
+        <p>{authorName} - {supportMail}</p>
       </div>
     </>
   );
