@@ -28,7 +28,7 @@ export default async function TermsOfUse() {
 
         <h1>TERMOS DE USO</h1>
 
-        <p className="my-3">Última atualização: 30 de abril de 2026</p>
+        <p className="my-3">Última atualização: 12 de outubro de 2026</p>
 
         <h3 className="my-3">ACEITAÇÃO DOS TERMOS</h3>
 
@@ -58,16 +58,25 @@ export default async function TermsOfUse() {
 
         <h3 className="my-3">2. DIREITOS DE PROPRIEDADE INTELECTUAL</h3>
 
+        <h4 className="mb-3">Código-fonte aberto</h4>
+
+        <p className="my-3">
+          O código-fonte do Linkedinsney é aberto e distribuído sob a <Link className="ml-1 underline underline-offset-2" href="https://github.com/ArturMiguel/linkedinsney" target="_blank" rel="noopener noreferrer">Licença MIT</Link>.
+          Qualquer pessoa pode usar, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e vender cópias do código-fonte, nos termos dessa licença.
+        </p>
+
         <h4 className="mb-3">Nossa propriedade intelectual</h4>
 
-        <p className="my-3">Somos proprietários ou licenciados de todos os direitos de propriedade intelectual relacionados aos nossos Serviços, incluindo todo o código-fonte,
-          bancos de dados, funcionalidades, softwares, designs do site, textos e gráficos presentes nos Serviços (coletivamente, o "Conteúdo"), bem como as marcas e logotipos ali contidos (as "Marcas").
+        <p className="my-3">
+          A licença do código-fonte não se estende à marca "Linkedinsney", ao logotipo e à identidade visual, que permanecem de nossa propriedade exclusiva,
+          nem ao banco de dados, ao conteúdo submetido pelos usuários e aos demais dados pessoais tratados pelos Serviços, que continuam regidos por esta seção
+          e pela Política de Privacidade (coletivamente, o "Conteúdo", excluído o código-fonte aberto; e as "Marcas").
         </p>
 
         <p className="my-3">O Conteúdo e as Marcas são fornecidos nos Serviços "NO ESTADO EM QUE SE ENCONTRAM", apenas para seu uso pessoal e não comercial.</p>
 
         <p className="my-3">
-          Nenhuma parte dos Serviços, nem qualquer Conteúdo ou Marca poderá ser copiada, reproduzida, republicada, transmitida, distribuída, vendida ou explorada comercialmente sem nossa autorização prévia por escrito.
+          Nenhuma parte do Conteúdo ou das Marcas poderá ser copiada, reproduzida, republicada, transmitida, distribuída, vendida ou explorada comercialmente sem nossa autorização prévia por escrito.
           Reservamo-nos todos os direitos não expressamente concedidos.
         </p>
 
@@ -108,9 +117,8 @@ export default async function TermsOfUse() {
           <li>Fazer uso automatizado dos Serviços, como scripts, robôs ou ferramentas de extração de dados.</li>
           <li>Usurpar identidade de outro usuário ou utilizar login alheio.</li>
           <li>Interferir ou sobrecarregar os Serviços ou redes associadas.</li>
-          <li>Decifrar, descompilar ou fazer engenharia reversa do software dos Serviços, salvo se permitido por lei.</li>
           <li>Coletar e-mails de usuários para envio de mensagens indesejadas ou criar contas de forma automatizada.</li>
-          <li>Utilizar os Serviços para concorrer conosco ou com fins comerciais não autorizados.</li>
+          <li>Utilizar sua conta ou dados obtidos por meio dela para concorrer conosco ou para fins comerciais não autorizados, ressalvado o uso do código-fonte aberto nos termos da Licença MIT.</li>
           <li>Vender ou transferir seu perfil a terceiros.</li>
         </ul>
 

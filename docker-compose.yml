@@ -1,7 +1,7 @@
 services:
   app:
-    image: linkedinsney-web:latest
-    container_name: linkedinsney-web
+    image: linkedinsney:latest
+    container_name: linkedinsney
     build:
       context: .
       dockerfile: Dockerfile
