@@ -27,8 +27,15 @@ export class AuthService {
 
   private static readonly legacyIv = CryptoJS.lib.WordArray.create(new Uint8Array(16));
 
-  static encrypt(text: string): string {
-    const iv = CryptoJS.lib.WordArray.random(16);
+  private static deterministicIv(text: string): CryptoJS.lib.WordArray {
+    const hmac = CryptoJS.HmacSHA256(text, this.encryptionKey);
+    hmac.sigBytes = 16;
+    hmac.clamp();
+    return hmac;
+  }
+
+  static encrypt(text: string, deterministic = false): string {
+    const iv = deterministic ? this.deterministicIv(text) : CryptoJS.lib.WordArray.random(16);
     const ciphertext = CryptoJS.AES.encrypt(text, this.encryptionKey, { iv }).toString();
     return `${iv.toString(CryptoJS.enc.Hex)}:${ciphertext}`;
   }

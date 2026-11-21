@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
         throw new Error(t("unknownAuthType"));
     }
 
-    const encryptedEmail = AuthService.encrypt(userPayload.email);
+    const encryptedEmail = AuthService.encrypt(userPayload.email, true);
 
     const user = await prisma.user.upsert({
       where: {

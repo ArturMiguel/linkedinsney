@@ -8,6 +8,7 @@ services:
     environment:
       DATABASE_URL: ${DATABASE_URL}
       DATABASE_DIRECT_URL: ${DATABASE_DIRECT_URL}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
     networks:
       - local-network
 

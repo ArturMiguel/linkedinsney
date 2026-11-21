@@ -42,7 +42,8 @@ RUN \
   fi
 
 FROM deps AS migrations
-CMD ["npx", "prisma", "migrate", "deploy"]
+COPY scripts ./scripts
+CMD ["sh", "-c", "npx prisma migrate deploy && npx tsx scripts/fix-duplicate-users.ts --apply"]
 
 FROM base AS runner
 WORKDIR /app

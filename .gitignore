@@ -43,5 +43,6 @@ next-env.d.ts
 
 .claude
 src/generated
-scripts
+scripts/*
+!scripts/fix-duplicate-users.ts
 .vscode
