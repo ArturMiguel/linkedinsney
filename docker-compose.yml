@@ -13,7 +13,7 @@ services:
         AUTHOR_EMAIL: ${AUTHOR_EMAIL}
         DATABASE_DIRECT_URL: ${DATABASE_DIRECT_URL}
     ports:
-      - "4005:3000"
+      - "127.0.0.1:4005:3000"
     environment:
       NODE_ENV: ${NODE_ENV}
       OLLAMA_API_URL: ${OLLAMA_API_URL}
@@ -33,3 +33,9 @@ services:
       RESEND_FROM_EMAIL: ${RESEND_FROM_EMAIL}
       RESEND_TO_EMAIL: ${RESEND_TO_EMAIL}
     restart: unless-stopped
+    networks:
+      - local-network
+
+networks:
+  local-network:
+    external: true
