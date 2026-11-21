@@ -6,7 +6,7 @@
     "postinstall": "prisma generate",
     "predev": "prisma generate",
     "dev": "next dev",
-    "build": "prisma generate && prisma migrate deploy && next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "migrate": "npx prisma migrate dev"
   },

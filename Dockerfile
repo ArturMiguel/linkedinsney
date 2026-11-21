@@ -27,14 +27,12 @@ ARG NEXT_PUBLIC_SITE
 ARG NEXT_PUBLIC_SUPPORT_EMAIL
 ARG AUTHOR_NAME
 ARG AUTHOR_EMAIL
-ARG DATABASE_DIRECT_URL
 
 ENV NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID=$NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID
 ENV NEXT_PUBLIC_SITE=$NEXT_PUBLIC_SITE
 ENV NEXT_PUBLIC_SUPPORT_EMAIL=$NEXT_PUBLIC_SUPPORT_EMAIL
 ENV AUTHOR_NAME=$AUTHOR_NAME
 ENV AUTHOR_EMAIL=$AUTHOR_EMAIL
-ENV DATABASE_DIRECT_URL=$DATABASE_DIRECT_URL
 
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
@@ -42,6 +40,9 @@ RUN \
   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
   else echo "Lockfile not found." && exit 1; \
   fi
+
+FROM deps AS migrations
+CMD ["npx", "prisma", "migrate", "deploy"]
 
 FROM base AS runner
 WORKDIR /app
