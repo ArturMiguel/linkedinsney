@@ -23,50 +23,32 @@
   <img src="https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white" alt="Next.js 16">
 </p>
 
+> **Na prática:**  
+> **Você escreve:** Perdi o cliente porque esqueci de enviar a proposta.  
+> **Linkedinsney:** Recentemente, vivi um desafio que me convidou a exercitar a vulnerabilidade e a encarar a perda de uma oportunidade como um catalisador de crescimento 💪 [...]
+
 ---
 
 ## Funcionalidades
 
-- **Tradução bidirecional**: transforma um texto honesto em post corporativo do LinkedIn, ou faz o caminho inverso e revela o que a pessoa realmente quis dizer.
-- **Linkedômetro**: cada tradução recebe uma pontuação de contaminação corporativa, de "Ser humano real" a "Embaixador(a) do propósito".
-- **Login com Google**: necessário pra traduzir, protege a IA contra abuso.
-- **Histórico**: reveja suas traduções anteriores quando quiser.
-- **Multilíngue**: pt-BR, en-US e es-ES, com tema claro/escuro.
-- **Dados criptografados**: e-mails e textos traduzidos ficam protegidos no banco.
+- Traduz nos dois sentidos: de um texto honesto para um post corporativo do LinkedIn, ou o caminho inverso, revelando o que a pessoa realmente quis dizer.
+- Cada tradução recebe uma nota de contaminação corporativa no Linkedômetro, de "Ser humano real" a "Embaixador(a) do propósito".
+- Login com Google é obrigatório pra traduzir, o que protege a IA contra abuso.
+- O histórico de traduções anteriores fica disponível pra consulta.
+- Interface em pt-BR, en-US e es-ES, com tema claro e escuro.
+- E-mails e textos traduzidos ficam criptografados no banco.
 
-## Arquitetura
+## Como funciona
 
-```mermaid
-flowchart LR
-    User(["Usuário"])
-    Frontend["Frontend\nNext.js + React"]
-    Backend["Backend\nAPI Routes"]
-    Google[("Google OAuth")]
-    IA[("Ollama · IA")]
-    DB[("PostgreSQL")]
-    Resend[("Resend")]
-    CI["GitHub Actions\n+ Docker"]
+![Arquitetura do Linkedinsney: Web em Next.js chama a API em Routes + JWT, que chama o LLM (Ollama) e persiste o histórico criptografado no Postgres](public/architecture.svg)
 
-    User -- usa --> Frontend
-    Frontend -- login / texto --> Backend
-    Backend -- autentica --> Google
-    Backend -- traduz --> IA
-    Backend -- persiste criptografado --> DB
-    Backend -- envia contato --> Resend
-    Backend -- resultado --> Frontend
-    Frontend -- exibe --> User
-    CI -. build & deploy .-> Backend
-```
+O front-end em Next.js manda o texto e o modo escolhido (traduzir ou decodificar) pro back-end, autenticado por um cookie `httpOnly` com JWT que se renova automaticamente perto do vencimento. O back-end monta o prompt certo pro modo e chama o Ollama, uma instância de IA self-hosted.
 
-| Camada (diagrama) | Tecnologia | Papel no projeto |
-| --- | --- | --- |
-| Frontend | Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS · Radix UI / shadcn/ui · React Hook Form · next-intl | Interface, rotas, renderização no servidor, formulário de tradução e idioma (pt-BR/en-US/es-ES) |
-| Backend | API Routes (Next.js) · JWT · AES | Autentica a sessão (cookie `httpOnly` com refresh automático), orquestra a tradução e criptografa os dados antes de persistir |
-| Google OAuth | Google Identity Services | Verifica a identidade de quem faz login |
-| IA | Ollama (self-hosted) | Gera a tradução e a pontuação do Linkedômetro, com guarda contra prompt injection |
-| PostgreSQL | Prisma | Guarda usuários e histórico de traduções |
-| Resend | API de e-mail transacional | Envia as mensagens do formulário de contato |
-| GitHub Actions + Docker | Docker Compose | Builda a aplicação e automatiza o deploy a cada push na `master` |
+Como o texto do usuário entra direto no prompt do modelo, os dois prompts instruem o Ollama a tratar qualquer comando embutido nesse texto como parte do conteúdo a traduzir. A resposta ainda passa por uma checagem que compara trechos da saída contra os próprios prompts do sistema, e rejeita com erro se detectar vazamento.
+
+No modo traduzir, as últimas cinco traduções do usuário voltam como histórico de conversa pro modelo manter o tom ao longo da sessão. No modo decodificar isso não acontece, e uma segunda chamada ao Ollama calcula a nota do Linkedômetro.
+
+Texto original e traduzido são criptografados com AES antes de ir pro PostgreSQL, então mesmo um acesso direto ao banco não expõe o conteúdo.
 
 ## Rodando localmente
 

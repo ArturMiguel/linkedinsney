@@ -73,6 +73,15 @@ export const Header = () => {
               <a href="/#how-it-works" className="transition-colors hover:text-foreground">{t("howItWorks")}</a>
             </nav>
             <div className="flex items-center gap-x-4">
+              <a
+                href="https://github.com/ArturMiguel/linkedinsney"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="rounded-md p-1.5 text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <img src="/github-logo.svg" alt="GitHub" className="h-5 w-5" />
+              </a>
               <ThemeToggle />
               <LocaleSwitcher />
               {user ? (
